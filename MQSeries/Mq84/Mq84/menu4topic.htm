@@ -1,0 +1,539 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+
+<HTML>
+<HEAD><TITLE>Menu Page (No topics can be opened)</TITLE>
+<SCRIPT LANGUAGE="JavaScript" SRC="menu.js"></SCRIPT>
+<LINK REL=stylesheet TYPE="text/css" HREF="Architecture.css" TITLE="style">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</HEAD>
+
+<BODY bgcolor="#9900cd" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLL="NO" onLoad="
+     if(is.ns4) {
+          available_width=innerWidth;
+          available_height=innerHeight;
+          preLoad();
+     } else if(is.ie4) {
+          available_width=document.body.clientWidth;
+          available_height=document.body.clientHeight;
+          preLoad();
+     }"
+
+onResize="history.go(0)">
+
+<DIV ID="titleLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 50px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="tropicLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 20px; height: 12px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="progLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 20px; height: 12px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="objLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 20px; height: 12px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="pdf11Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 12; visibility: hidden;">
+<a href="labs/lab1.exe">
+ <img src="media/g3112b.jpg" border=0 alt="PDF for Lab 1">
+</a>
+</DIV>
+
+<DIV ID="pdf12Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 12; visibility: hidden;">
+<a href="labs/labSetupDoc.exe">
+  <img src="media/g3112b.jpg" border=0 alt="Lab Setup Doc">
+</A>
+</DIV>
+
+<DIV ID="pdf2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 12; visibility: hidden;">
+<a href="labs/lab2.exe">
+  <img src="media/g3112b.jpg" border=0 alt="PDF for Lab 2">
+</A>
+</DIV>
+
+<DIV ID="pdf3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 12; visibility: hidden;">
+<a href="labs/lab3.exe">
+ <img src="media/g3112b.jpg" border=0 alt="PDF for Lab 3">
+</a>
+</DIV>
+
+<DIV ID="pdf4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 12; visibility: hidden;">
+<a href="labs/lab4.exe">
+  <img src="media/g3112b.jpg" border=0 alt="PDF for Lab 4">
+</A>
+</DIV>
+
+<DIV ID="pdf5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 12; visibility: hidden;">
+<a href="labs/lab5.exe">
+  <img src="media/g3112b.jpg" border=0 alt="PDF for Lab 5">
+</A>
+</DIV>
+
+<DIV ID="topLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 1; visibility: hidden;">
+   <IMG SRC="media/G3000d.jpg" border="0">
+</DIV>
+
+<DIV ID="linkLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 20px; height: 300px; z-index: 1; visibility: hidden;">
+   <IMG SRC="media/G3107b.jpg" border="0">
+</DIV>
+
+<DIV ID="cb1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht1(); result=set_cookie(); result=vist1();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht2(); result=set_cookie(); result=vist2();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht3(); result=set_cookie(); result=vist3();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht4(); result=set_cookie(); result=vist4();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht5(); result=set_cookie(); result=vist5();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht6(); result=set_cookie(); result=vist6();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb7Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht7(); result=set_cookie(); result=vist7();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb8Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht8(); result=set_cookie(); result=vist8();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb9Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht9(); result=set_cookie(); result=vist9();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb10Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht10(); result=set_cookie(); result=vist10();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb11Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht11(); result=set_cookie(); result=vist11();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb12Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht12(); result=set_cookie(); result=vist12();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb13Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht13(); result=set_cookie(); result=vist13();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb14Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 3; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switcht14(); result=set_cookie(); result=vist14();">
+   <IMG SRC="media/G3102b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb21Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 50px; height: 10px; z-index: 5; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switchl1(); result=set_cookie(); result=visl1();">
+   <IMG SRC="media/G3110b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb22Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 50px; height: 10px; z-index: 5; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switchl2(); result=set_cookie(); result=visl2();">
+   <IMG SRC="media/G3110b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb23Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 50px; height: 10px; z-index: 5; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switchl3(); result=set_cookie(); result=visl3();">
+   <IMG SRC="media/G3110b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb24Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 50px; height: 10px; z-index: 5; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switchl4(); result=set_cookie(); result=visl4();">
+   <IMG SRC="media/G3110b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="cb25Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 50px; height: 10px; z-index: 5; visibility: hidden;">
+<A href="javascript:void(null);" onclick="result=switchl5(); result=set_cookie(); result=visl5();">
+   <IMG SRC="media/G3110b.jpg" border="0" alt="Progress indicator">
+</A>
+</DIV>
+
+<DIV ID="exitLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 15px; height: 15px; z-index: 12; visibility: hidden;">
+<a href="javascript:void(null)" onClick="self.close()">
+   <IMG SRC="media/G3134b.jpg" border="0" alt="Exit to topic">
+</a>
+</DIV>
+
+<DIV ID="exit2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 14; visibility: hidden;">
+<a href="javascript:void(null)" onClick="closeObjectives();">
+   <IMG SRC="media/G3134c.jpg" border="0" alt="Exit Objectives">
+</a>
+</DIV>
+
+<DIV ID="infoLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 12; visibility: hidden;">
+<a href="help4topic.htm">
+   <IMG SRC="media/G3132b.jpg" border="0" alt="Info">
+</a>
+</DIV>
+
+<DIV ID="glossLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 12; visibility: hidden;">
+<a href="glos4topic.htm">
+   <IMG SRC="media/G3133b.jpg" border="0" alt="Glossary">
+</a>
+</DIV>
+
+<DIV ID="textLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>01   A review of MQSeries                         </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>02   Installation and configuration               </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>03   A review of the MQI                          </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>04   Triggering                                   </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>05   Queue manager architecture                   </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>06   Problem determination                        </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t7Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>07   Transaction and recovery support             </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t8Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>08   Distributed queue management                 </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t9Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>09   The MQI in the network                       </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t10Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>10   MQSeries clients                             </FONT></PRE>
+</a>
+</DIV>
+
+
+<DIV ID="t11Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>11   Security                                     </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t12Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 10px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>12   Queue manager clusters                        </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t13Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>13   MQSeries for Windows                          </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="t14Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 5px; z-index: 2; visibility: hidden;">
+<a href="javascript:void(null)">
+<PRE><FONT CLASS=MartinAnchors>       Check real case studies                       </FONT></PRE>
+</a>
+</DIV>
+
+<DIV ID="lab1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 168px; height: 10px; z-index: 5; visibility: hidden;">
+<FONT CLASS=MartinAnchorsSW>Lab 1: Installation and configuration</FONT>
+</DIV>
+
+<DIV ID="lab2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 168px; height: 10px; z-index: 5; visibility: hidden;">
+<FONT CLASS=MartinAnchorsSW>Lab 2: Triggering</FONT>
+</DIV>
+
+<DIV ID="lab3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 168px; height: 10px; z-index: 5; visibility: hidden;">
+<FONT CLASS=MartinAnchorsSW>Lab 3: Recovery</FONT>
+</DIV>
+
+<DIV ID="lab4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 168px; height: 10px; z-index: 5; visibility: hidden;">
+<FONT CLASS=MartinAnchorsSW>Lab 4: Distributed queue management</FONT>
+</DIV>
+
+<DIV ID="lab5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 168px; height: 10px; z-index: 5; visibility: hidden;">
+<FONT CLASS=MartinAnchorsSW>Lab 5: MQSeries clients</FONT>
+</DIV>
+
+<DIV ID="bt1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt7Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt8Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt9Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt10Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt11Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 12px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt12Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt13Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt14Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 6px; z-index: 1; visibility: hidden;">
+<img src="media/G3100b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt21Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 12px; z-index: 1; visibility: hidden;">
+<img src="media/G3108b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt22Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 12px; z-index: 1; visibility: hidden;">
+<img src="media/G3108b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt23Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 12px; z-index: 1; visibility: hidden;">
+<img src="media/G3108b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt24Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 12px; z-index: 1; visibility: hidden;">
+<img src="media/G3108b.jpg" border=0>
+</DIV>
+
+<DIV ID="bt25Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 300px; height: 12px; z-index: 1; visibility: hidden;">
+<img src="media/G3108b.jpg" border=0>
+</DIV>
+
+<DIV ID="t1cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 25px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t2cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t3cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+
+<DIV ID="t4cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t5cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t6cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t7cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t8cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t9cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t10cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t11cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t12cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t13cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="t14cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 10px; height: 10px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="lab1cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 400px; height: 10px; z-index: 4; visibility: hidden;">
+</DIV>
+
+<DIV ID="lab2cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 400px; height: 10px; z-index: 4; visibility: hidden;">
+</DIV>
+
+<DIV ID="lab3cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 400px; height: 10px; z-index: 4; visibility: hidden;">
+</DIV>
+
+<DIV ID="lab4cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 400px; height: 10px; z-index: 4; visibility: hidden;">
+</DIV>
+
+<DIV ID="lab5cbLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 400px; height: 10px; z-index: 4; visibility: hidden;">
+</DIV>
+
+<DIV ID="bluepanelLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 125px; height: 128px; z-index: 13; visibility: hidden;">
+<IMG SRC="media/bluepanel.jpg">
+</DIV>
+
+<DIV ID="t1txtLayer" STYLE="position: absolute; left: 0px; top: 0px; z-index: 13; visibility: hidden;">
+</DIV>
+
+<DIV ID="t2txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t3txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t4txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t5txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t6txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t7txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t8txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t9txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t10txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t11txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t12txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t13txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="t14txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="l1txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="l2txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="l3txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="l4txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="l5txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 13; visibility: 
+hidden;">
+</DIV>
+
+</BODY>
+</HTML>

@@ -1,0 +1,165 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head><title>Topic 7 - Transaction and Recovery Support - Audio transcript </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ84 - Topic 7: Transaction and recovery support</h1>
+
+<FONT SIZE="+2"> Message persistence</FONT>
+<br>
+Messages that are marked as persistent are retained by the queue manager, until serviced by an application.
+<P>
+Putting a persistent message results in it being copied, by the queue manager, to the logging facility before it is put on the application queue.
+<P>
+Persistence is an attribute setting, within the message descriptor, and is either specified or inherited from the queue definition.
+<P>
+A queue can contain both persistent and nonpersistent messages, but only persistent messages are recoverable.
+<P>
+Recovery is by command or on restart of the queue manager.
+<br><br><br>
+
+<FONT SIZE="+2">Logging</FONT>
+<br>
+The logging feature of MQSeries stores information for the restart of the queue manager and the recovery of objects and messages.
+<P>
+There are two types of log files, both provide for the recovery of current units of work, but only linear logs provide for the recreating of MQSeries objects.
+<P>
+Circular logs are defined as a number of primary and secondary logs, each log is assigned a number and used in a circular manner, with noncurrent log information being overwritten.
+<P>
+Linear logs will not be overwritten, as one log fills up a new log will be created and formatted. A disk management system is required to manage the archiving of the logs.
+<P>
+The log control file is used to manage the log inventory.<br>
+The administrator must indicate, at the time of queue manager creation, what type of logging is required.<br>
+To change the type of logging the queue manager must be recreated.
+<P>
+Click on each file type to see more information.
+<br><br><br>
+
+
+<FONT SIZE="+2">Physical object recovery</FONT>
+<br>
+When a queue manager is started, the status of the previous execution is checked by reading information from the checkpoint file and the logs.
+<P>
+If the queue manager was not shutdown in an orderly manner, recovery of incomplete work units will be performed.
+<P>
+If, during this process, the queue manager is unable to access an object, due to physical damage, the object will be reconstructed from the logs, but only if the logging system is linear.
+<P>
+If the logs are circular, then the object is flagged as physically damaged and the queue manager terminates.
+<P>
+If, during normal processing, an object is detected as physically damaged, it will be flagged as damaged and no further processing will be allowed.
+<P>
+The application making the request will be notified, by response to the call, and the queue manager will continue processing.
+<P>
+The supplied recovery command must now be used to re-construct the object.
+<P>
+Click on the checkpoint file to discover more information.
+
+<br><br><br>
+
+
+<FONT SIZE="+2">Media recovery</FONT>
+<br>
+An object can only be recovered if it is marked as damaged.
+<P>
+A sequence of log records, known as the media image, is recorded as the start point for the recovery of each object. If this image is not available the object can not be recovered, circular logging does not support media image log records.
+<P>
+The queue manager will automatically record this media image, when the queue is created and also on shutdown if the object is empty.
+<P>
+Many logs may be needed to recover the object. To reduce this recovery time, it is advisable to record a media image on a regular basis, particularly for deferred processing queues.
+<P>
+Click on the commands for further details.
+<br><br><br>
+
+
+<FONT SIZE="+2">Dumping the log</FONT>
+<br>
+If it is required to display and interpret the contents of a log a command has been provided. The output of this command is a formatted version of the logs, starting by default, from the last checkpoint record.
+<P>
+This command can only be performed while the queue manager is inactive.
+<br><br><br>
+
+
+<FONT SIZE="+2">Unit of work</FONT>
+<br>
+The scope of a unit of work is the set of actions required to change the state of related resources and is completed at the commit point. At which time, the changes are made available.
+<P>
+In the event of a failure during the unit of work, all the changes are reversed.
+<P>
+Now click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Resource manager</FONT>
+<br>
+A resource manager is an application that manages objects and allows access to those objects via a registered interface, called an API or as in the case of MQSeries, an MQI.
+<P>
+A resource manager is responsible for the co-ordination of changes made to resources under its control and cannot manage changes to resources outside of its control.
+<P>
+An application may call upon the services of many resource managers during a unit of work, but cannot co-ordinate them all with one request.
+<br><br><br>
+
+
+<FONT SIZE="+2">Syncpoint co-ordinator</FONT>
+<br>
+A syncpoint co-ordinator is an application that acts as a resource manager co-ordinator.
+<P>
+It has an API that provides a unit of work co-ordination point, called a syncpoint.
+<P>
+A syncpoint call is issued, by the application, to request that all the work performed during the unit of work is to be committed or reversed.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQPUT call within syncpoint control</FONT>
+<br>
+An application may request, on the MQPUT call, that the message is not to be made available until the unit of work has been completed. This is achieved by the use of the syncpoint option on the MQPUT call. If the unit of work is not completed successfully the MQPUT call can be reversed, thereby removing the message. If the unit of work is successful, either by the use of a commit call or the normal completion of the application, then the message becomes available for subsequent processing. Messages that are put on a queue without the use of the syncpoint option are not co-ordinated by the unit of work and become available immediately.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQGET call within syncpoint control</FONT>
+<br>
+An application may request the syncpoint option on the MQGET call, so that the message is not removed from the queue until the unit of work has been completed. If the unit of work is not completed successfully the MQGET call is reversed, thereby making the message available for subsequent processing. Upon successful completion of the unit of work the message is removed from the queue. Messages that are read from a queue without the use of the syncpoint option are not co-ordinated by the unit of work and are removed immediately with no recovery possible.
+<br><br><br>
+
+
+<FONT SIZE="+2">Changes to MQSeries resources</FONT>
+<br>
+An MQSeries client application can also use the MQCMIT and MQBACK calls.
+MQSeries, as a resource manager, provides the MQI calls MQCMIT and MQBACK for the co-ordination of units of work. The MQBACK command is used to reverse the changes made to the queues by the MQGET and MQPUT commands, but only if they were issued with the syncpoint option. The MQCMIT command is used to release and thereby make available the changes made to the queues by the MQGET and MQPUT calls, but only if they were issued with the syncpoint option.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Changes to other resources</FONT>
+<br>
+By using the MQBEGIN call the application requests the queue manager to act as the syncpoint co-ordinator for a specific XA-Open compliant resource manager. When the MQCMIT and MQBACK calls are issued the queue manager will co-ordinate with the other resource manager the changes made during the current unit of work. The MQBEGIN call is only supported where XA-Open resource managers are available.
+<P>
+In the example, a server application gets a request message from the server queue, puts a reply message on the reply-to queue, and inserts a row into a DB2 table, all within a unit of work co-ordinated by the queue manager.
+<br><br><br>
+
+
+<FONT SIZE="+2">External syncpoint co-ordinator</FONT>
+<br>
+MQI calls may be called from within an existing application running under the control of a syncpoint co-ordinator, in which case the MQBEGIN, MQCMIT and MQBACK calls can not be used. Instead, the syncpoint co-ordinator will take responsibility for  unit of work co-ordination with the resource managers including the queue manager.
+<P>
+In this example, the IBM Transaction Server product CICS is being used as the external syncpoint co-ordinator. Note the use of the CICS syncpoint call as the unit of work co-ordination call.
+<br><br><br>
+
+
+<FONT SIZE="+2">Supported syncpoint co-ordinators</FONT>
+<br>
+The external syncpoint co-ordinators that can be used depends on the MQSeries product.
+<P>
+Click each MQSeries product  to see the external syncpoint co-ordinators supported by that product.
+<P>
+This list of supported external syncpoint co-ordinators is correct at the time of publication.  For up-to-date information, look up the URL shown here.
+<br><br><br>
+
+
+
+</font>
+</body>
+</html>

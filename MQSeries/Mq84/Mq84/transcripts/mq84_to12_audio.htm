@@ -1,0 +1,141 @@
+<html>
+<head><title>Topic 12 - Waiting for replies - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 12: Waiting for replies</h1>
+
+<FONT SIZE="+2">The wait option on the MQGET call</FONT>
+<br>
+Whenever a client application issues a request for which it expects to receive a reply or report message, there will be some delay until the reply arrives.<br>
+There are a number of reasons for this. For example, the processing time in the application that serves the request.
+<P>
+One of the main reasons for a delay of the reply or report message is the elapsed time of a message in the network, when it is sent from one queue manager to another and vice versa.
+<P>
+The get message option MQGMO_WAIT allows an application to wait until a message has arrived on the input queue.<br>
+The waitinterval field in the get message options structure allows the specification of how long the application will wait until a message arrives
+<P>
+When a message arrives within the interval specified by the application, the wait situation will be resolved and the message will be delivered to the program.
+<P>
+The get message option MQGMO_WAIT can be used together with any selection criteria. Reason Code MQRC_NO_MESSAGE_AVAILABLE is returned when no suitable message arrives within the wait interval.<br>
+Applications must be designed to handle this situation.
+<P>
+The wait interval can be specified as MQWI_UNLIMITED, which means that an application will wait forever until a suitable message arrives.<br>
+This should only be used together with the get message option MQGMO_FAIL_IF_QUIESCING. Otherwise a queue manager cannot be shut down in quiescing mode.<br>
+Only finite wait intervals should be used in an IMS environment.
+<br><br><br>
+
+
+<FONT SIZE="+2">Shared input</FONT>
+<br>
+It is also possible that multiple applications are waiting for a suitable message on the same queue.<br>
+The queue need not necessarily be empty. The applications could use the same or different selection criteria with the MQGet call.<br>
+However, if they are all using the same selection criteria, if any, then there is no
+way to determine which application will get the message.
+<br><br><br>
+
+<FONT SIZE="+2">Coding the wait option</FONT>
+<br>
+Here is an example of how to code the MQGET call with the wait option.<br>
+Refer to the <I>MQSeries Application Programming Reference</I> if you wish to see examples of any of the following in the programming language that you use:
+<UL>
+<LI>How a message descriptor is declared
+<LI>How a get message options structure is declared
+<LI>How the parameters of an MQGET call are declared
+<LI>The format of an MQGET call
+</UL>
+
+Click each block of pseudo-code in turn to read a commentary on what the code does.
+<br><br><br>
+
+<FONT SIZE="+2">The signal option on the MQGET call</FONT>
+<br>
+Only the OS/390 implementation is discussed here.<br>
+See the <I>Application Programming Reference</I> and <I>Application Programming Guide</I>  for more details on the other two queue managers if required.<br>
+Click the OS/390 button to see more about this option or click the next button to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">The signal option on the MQGET call</FONT>
+<br>
+This shows a client application running in an OS/390 environment.<br>
+The application has put a request message to a queue on the OS/390 queue
+manager. The message is now transferred to another queue manager for
+processing. There will be a delay until the reply or report arrives, so the client
+application may have to wait for it.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The signal option on the MQGET call</FONT>
+<br>
+The program now sets up the get message options structure for the subsequent
+MQGet call.<br>
+First, it sets the Options field to  MQGMO_SET_SIGNAL.<br>
+This option does not block the application. It can continue processing after having issued the MQGet call.
+<P>
+Second, it specifies a wait interval of 5 minutes. This means that the queue manager will wait up to 5 minutes for a suitable message on the reply queue before it posts an ECB (an event control block) to indicate the results of the call.
+<P>
+Third, it sets the Signal1 field to the address of an ECB. The ECB must be cleared before the MQGet call is issued. The storage containing the ECB must not be freed until the queue is closed.<br>
+The Signal1 field has the datatype MQLONG and its initial value is a null pointer
+on OS/390, and zero otherwise.
+<P>
+Fourth, the application issues the MQGet call.<br>
+If a suitable message is available the MQGet call completes normally.<br>
+If no suitable message is available the call completes with a completion code of
+MQCC_WARNING and a reason code MQRC_SIGNAL_REQUEST_ACCEPTED, assuming there are no other errors on the call.
+<br><br><br>
+
+
+<FONT SIZE="+2">The signal option on the MQGET call</FONT>
+<br>
+If the application has no more processing to do, it can wait for the ECB to be posted. This is done using the EXEC CICS WAIT EXTERNAL command for CICS applications or the OS/390 WAIT macro for batch, TSO, and IMS applications.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The signal option on the MQGET call</FONT>
+<br>
+When ECB is posted, the application examines the signal completion code to determine whether a suitable message has arrived.<br>
+The signal completion code is set in bits 2 through 31, the area reserved for a user completion code.
+<br><br><br>
+
+
+<FONT SIZE="+2">The signal option on the MQGET call</FONT>
+<br>
+If a suitable message has arrived, another MQGET call needs to be issued to retrieve the message.<br>
+However, the message may have been retrieved by another application in the meantime.<br>
+So the application must be able to cope with reason code MQRC_NO_MSG_AVAILABLE.
+<br><br><br>
+
+
+<FONT SIZE="+2">The signal option on the MQGET call</FONT>
+<br>
+These are the reason codes that are returned in the ECB  when it is posted by the queue manager, after an MQGet call with the get message option. <br>
+MQGMO_SET_SIGNAL was issued.
+<P>
+You will find the full descriptions in the <I>MQSeries Application Programming Reference</I>.
+<P>
+Click each reason code in turn to see its meaning.
+<br><br><br>
+
+
+<FONT SIZE="+2">Coding the signal option</FONT>
+<br>
+Here is an example of how to code the MQGET call with the signal option.
+<P>
+Refer to the <I>MQSeries Application Programming Reference</I> if you wish to see examples of any of the following in the programming language that you use:
+<UL>
+<LI>How a message descriptor is declared
+<LI>How a get message options structure is declared
+<LI>How the parameters of an MQGET call are declared
+<LI>The format of an MQGET call
+</UL>
+
+Click each block of pseudo-code in turn to read a commentary on what the code does.
+<br><br><br>
+
+</font>
+</body>
+</html>

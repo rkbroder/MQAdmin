@@ -1,0 +1,191 @@
+<html>
+<head><title>Topic 4 - The MQOPEN call - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 4: The MQOPEN call</h1>
+
+<FONT SIZE="+2">What happens on an MQOPEN call?</FONT>
+<br>
+There are three input parameters on an MQOPEN call,
+a connection handle, an object descriptor and one or more open options.
+
+<UL>
+<LI>The connection handle was returned by a previous MQCONN call.
+<LI>The object descriptor is a structure that identifies the queue to be opened.
+<LI>The open options control the action of an MQOPENcall.
+</UL> 
+For example, they enable an application to specify the types of operation that it wishes to perform on the queue.
+<P>
+This shows the name of the parameters as they appear in the <I>MQSeries Application Programming Reference</I>.
+Move the mouse over each name for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">What happens on an MQOPEN call?</FONT>
+<br>
+When the queue manager receives control, it performs a number of checks.
+<P>
+It checks that the queue identified by the object descriptor actually exists,
+that each of the open options and their combination is valid for the queue,
+and that the application is authorized to open the queue for the types of operation requested.
+<P>
+Provided everything is in order, the queue manager opens the queue - in other words, it allows the application to access the queue for the types of operation requested.
+<br><br><br>
+
+<FONT SIZE="+2">What happens on an MQOPEN call?</FONT>
+<br>
+There are three output parameters on an MQOPEN call:<br>
+an object handle, a completion code and a reason code.
+<P>
+The object handle is a 32-bit binary value.
+<P>
+It represents the access that has been established to the queue and must be specified as an input parameter on all subsequent MQI calls that operate on that queue.
+<P>
+The names of the parameters are as they appear in the <I>MQSeries Application Programming Reference</I>. Click each name for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+<FONT SIZE="+2">The object handle</FONT>
+<br>
+The object handle returned by the MQOPEN call must be specified as an input parameter on all subsequent MQI calls that operate on the queue.
+<P>
+An object handle ceases to be valid when an MQCLOSE call is issued and can no longer be used as an input parameter on any MQI calls that operate on that queue.  If the application subsequently opens the queue again, it will receive a different object handle.
+<P>
+An object handle also ceases to be valid when the unit of parallel processing that defines its scope terminates. The rules for determining the scope of an object handle for a specific application environment are the same as those for determining the scope of a connection handle.
+<P>
+The call fails if the object handle specified as an input parameter on an MQI call is not valid.
+<br><br><br>
+
+<FONT SIZE="+2">Two or more queues open concurrently</FONT>
+<br>
+It is a common requirement that an application operates on two or more queues concurrently.
+<P>
+For example, an application opens a queue named SALES_TRANSACTION.  <br>
+It then enters a loop in which it gets messages from the queue and processes them.  After leaving the loop, the application closes the queue.
+<P>
+The MQOPEN call returns an object handle, <FONT SIZE="+1" COLOR="#000000" FACE="Courier">Hsales</FONT>, that is specified as an input parameter on the subsequent MQGET and MQCLOSE calls that operate on the queue.
+<br><br><br>
+
+<FONT SIZE="+2">Two or more queues open concurrently</FONT>
+<br>
+After the application has processed a message that it has retrieved from the SALES_TRANSACTION queue, it needs to put a message on another queue named STOCK_REQUEST.
+<P>
+The application therefore opens the STOCK_REQUEST queue, puts a message on the queue each time round the loop, and closes the queue after leaving the loop.
+<P>
+The MQOPEN call that opens the STOCK_REQUEST queue returns an object handle, <FONT SIZE="1" COLOR="#000000" FACE="Courier">Hstock</FONT>, that is specified as an input parameter on the subsequent MQPUT and MQCLOSE calls that operate on the queue. This object handle is different from the one that was returned when the SALES_TRANSACTION queue was opened.  So, on an MQI call, the object handle effectively identifies which queue is being operated on.
+<P>
+An application may open the same queue more than once.
+<P>
+A different object handle is returned by each MQOPEN call and the handles may be held concurrently. Typically, in this situation, the application might specify different open options on each MQOPEN call.
+<br><br><br>
+
+<FONT SIZE="+2">The object descriptor</FONT>
+<br>
+The object descriptor identifies the queue to be opened.<br>
+It is a structure with data type MQOD.
+<P>
+Here are some of the fields in the MQOD structure. They are listed in the order in which they appear within the structure. When you are programming, you will refer to the fields by name and so their order is not a relevant consideration. It becomes important only if you ever have to decipher a dump or a trace that contains an object descriptor.
+<P>
+The names of the fields are as they appear in the <I>MQSeries Application Programming Reference</I>. Click each field in turn to read a description of the field and to discover its data type. A full description of all the fields in the MQOD structure can be found in the <I>MQSeries Application Programming Reference</I>.
+<br><br><br>
+
+<FONT SIZE="+2">The object descriptor</FONT>
+<br>
+For each supported programming language, MQSeries provides a means of initializing the fields in the object descriptor. This saves the application having to initialize each field in turn. In general, the initial values are the ones you would expect as they are the values that an application requires in most circumstances.
+<P>
+Click each field in turn in order to determine the initial value of the field.
+For a full list of initial values for the fields in the object descriptor, see the <I>MQSeries Application Programming Reference</I>.
+<br><br><br>
+
+<FONT SIZE="+2">The open options</FONT>
+<br>
+The open options control the action of an MQOPEN call.<br>
+Here are some of the options that are available.<br>
+An application may specify more than one option on an MQOPEN call.
+The values can then be added together, or combined using the bit wise OR operation, provided the programming language supports this operation.
+<P>
+Click each option in turn for an explanation of that option.
+<br><br><br>
+
+<FONT SIZE="+2">Shared input</FONT>
+<br>
+The use of the MQOO_INPUT_SHARED option enables two or more applications to be retrieving messages from a queue concurrently.<br>
+If an application issues an MQOPEN call with option, the call will succeed only if the queue has already been opened by this or another application with the MQOO_INPUT_SHARED option, or no application has the queue open.
+<br><br><br>
+
+<FONT SIZE="+2">Exclusive input</FONT>
+<br>
+The use of the MQOO_INPUT_EXCLUSIVE option enables an application to secure sole access to a queue for the purpose of retrieving messages.<br>
+This does not prevent other applications from opening the queue for other purposes, such as to put messages on it.
+<P>
+If an application issues an MQOPEN call with option, the call will succeed only if the queue has not already been opened by this or another application, irrespective of the type of access.<br>
+If a queue is already open with this option, any attempt by this or another application to open the queue with either of the input options will fail.
+<br><br><br>
+
+<FONT SIZE="+2">Coding the MQOPEN call</FONT>
+<br>
+Here is an example of how to code the MQOPEN call. Click each block of pseudo-code in turn to read a commentary on what the code does.
+<P>
+Refer to the <I>MQSeries Application Programming Reference</I> if you wish to see examples, in the programming language that you use, of how the parameters of an MQOPEN call are declared, and the format of the call.
+<br><br><br>
+
+<FONT SIZE="+2">Alias queues</FONT>
+<br>
+Until now the term “queue” has been used to refer to a particular type of queue called a <I>local queue</I>.<br>
+Every local queue has a definition that is maintained by the queue manager.<br>
+This definition consists of a set of attributes, one of these being the name of the queue.<br>
+A local queue can store messages.
+<P>
+An <I>alias queue</I> is another type of queue.  Like a local queue, an alias queue has a definition that is maintained by the queue manager and which consists of a set of attributes, one of these being the name of the alias queue.<br>
+But, unlike a local queue, an alias queue cannot store messages.
+<P>
+The purpose of an alias queue is to allow an application to reference a local queue by a different name.<br>
+You could therefore view an alias queue as a “pointer” to a local queue.
+The definition of an alias queue contains, as one of its attributes, the name of the local queue that it is referencing, the so-called <I>base queue</I>.
+<P>
+As an example, an alias queue named BRANCH_TRANSACTION has been created and its base queue is the local queue named ACCOUNT_TRANSACTION.<br>
+An application sets the <I>ObjectName</I> field in the object descriptor to the name of the alias queue prior to issuing an MQOPEN call.<br>
+When the call is executed, the queue manager recognizes that BRANCH_TRANSACTION is the name of an alias queue and, by reference to its definition, the queue manager <I>resolves</I> the alias to the name of the base queue, namely ACCOUNT_TRANSACTION.<br>
+In this way, the application establishes access to the local queue ACCOUNT_TRANSACTION by using a different name.
+<P>
+It is transparent to the program whether a queue is an alias queue or a local queue.  The application program does not need to know the type of a queue.<br>
+There is also no field in the object descriptor that describes the queue type.
+<br><br><br>
+
+<FONT SIZE="+2">Model queues</FONT>
+<br>
+There is another type of queue called a <I>model queue</I>.
+A model queue also has a definition which consists of a set of attributes, one of which is the name of the model queue.<br>
+And, like an alias queue, a model queue cannot store messages.
+<P>
+The purpose of a model queue is to act as a template for a <I>dynamic queue</I>.<br>
+A dynamic queue is created when an application issues an MQOPEN call specifying the name of a model queue in the <I>ObjectName</I> field of the object descriptor.<br>
+The dynamic queue has the same attributes as those of the model queue.
+<P>
+A dynamic queue is a special type of  local queue - it can store messages like any other local queue.<br>
+It is called a dynamic queue because it is created dynamically by an application at the time when it is required.<br>
+The object handle returned by the MQOPEN call that creates a dynamic queue represents the access that has been established to the dynamic queue, not to the model queue that was used to create it.
+<P>
+You will see later how dynamic queues are used.
+<P>
+There are two types of dynamic queue, <I>temporary</I> and <I>permanent</I>.<br>
+Click  the dynamic queue to see an explanation of the two types.
+<br><br><br>
+
+
+<FONT SIZE="+2">Naming a dynamic queue</FONT>
+<br>
+When a dynamic queue is created, it requires a name.<br>
+An additional field in the object descriptor plays a role in determining the name of the dynamic queue.<br>
+The name of the field is <I>DynamicQName</I>.
+<P>
+Click  the <I>DynamicQName</I> field to find out more information about the field. After you have done that, click the ObjectName field to read more about its role in this context.
+<br><br><br>
+
+
+
+
+</font>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<html>
+<head><title>Topic 11- Message and CorrelId identifiers- Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 11: Message Identifiers</h1>
+
+<FONT SIZE="+2">The <I>MsgId</I> and <I>CorrelId</I> fields</FONT>
+<br>
+This topic provides more information about the <I>MsgId</I> and <I>CorrelId</I> fields in the message descriptor.
+<P>
+The MsgId field is used to hold a message identifier for a message and the <I>CorrelId</I> field is used to hold a correlation identifier. In a reply or report message, the normal convention is for the <I>CorrelId</I> field to be set to the message identifier of the original message. In this way, the application that receives the reply or report message can match it with the original message.
+<P>
+The data type of both fields is MQBYTE24. This means that both fields contain byte strings, not character strings. One implication of this is that the contents of these fields are never converted when a message moves from one queue manager to another. The 24 byte value in each of the fields remains the same. As a result, these fields should not really be used to hold application data.
+<br><br><br>
+
+
+<FONT SIZE="+2">A client/server scenario</FONT>
+<br>
+A client application puts a request message on a queue that is being served by a server application. The server application gets the request message, processes it, formulates the reply, and then puts the reply message on the reply-to queue. The client application is then able to retrieve the reply message. Suppose that multiple instances of the client application are running and are all putting request messages on the same server queue and sharing a single reply-to queue. How does each client retrieve only the reply message that matches its original request message, leaving the remaining messages on the queue? The <I>MsgId</I> and <I>CorrelId</I> fields can be used to solve this problem.
+<P>
+A client application can set the <I>MsgId</I> field to MQMI_NONE before issuing the MQPUT call that puts a request message on the server queue. When the queue manager receives control, it generates a unique message identifier which it places in the <I>MsgId</I> field of the message descriptor that accompanies the request message. It then returns the generated message identifier to the client application as an output field in the message descriptor.
+<P>
+When the server application retrieves the request message and sends a reply, it copies the contents of the <I>MsgId</I> field of the request message into the <I>CorrelId</I> field of the reply message. It also sets the MsgID field to MQMI_NONE before issuing the MQPUT call. As a result, the correlation identifier of the reply message is the same as the message identifier of the original request message. This is the normal convention and is described in more detail in Topic  “Replies and reports”.
+<P>
+Finally, in order to retrieve only the reply message that matches the original request message, the client application sets the <I>CorrelId</I> field to the message identifier of the original request message before issuing the MQGET call. The use of the <I>MsgId</I> and <I>CorrelId</I> fields for specifying selection criteria when retrieving a message from a queue was introduced in Topic  “The MQGET call”. There is more information about this later in this topic.
+<br><br><br>
+
+<FONT SIZE="+2">Sending requests to multiple servers</FONT>
+<br>
+Consider a case in which a client application sends request messages to two or more different server applications and receives the reply from each. There is one server queue for each server application and a single reply-to queue that is shared by multiple instances of the client application.
+<P>
+This is a common requirement. For example, a client application that is processing a loan request may need to send a request message to a server application that can check the customer’s bank account status and another to a server application that can check the customer’s credit status. The client application needs to receive both replies before it can make a decision on the loan request.
+<P>
+There are three approaches available - click next to learn more about them.
+<br><br><br>
+
+<FONT SIZE="+2">Sending requests to multiple servers</FONT>
+<br>
+The first approach is for each request message to have a unique message identifier.<br>
+Then adopt the normal convention for the way in which the correlation identifier of a reply message is derived, as in the previous scenario.<br>
+However, this procedure may lead to more complicated logic for receiving the reply messages.<br>
+For instance, a client application now has to save multiple message identifiers, one for each request message it has sent.<br>
+It then issues an MQGET call for each reply message by setting the <I>CorrelId</I> field to each of the saved message identifiers in turn.<br>
+Also, the asynchronous nature of the processing means that the order in which the reply messages arrive on the reply-to queue cannot be guaranteed.
+<P>
+To see the second approach, click next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Sending requests to multiple servers</FONT>
+<br>
+An alternative approach is for a client application to assign the same unique message identifier to each request message that is associated with one business transaction.<br>
+The queue manager can generate a unique message identifier for the first request message and then set the MsgId field to this value for each subsequent request message.<br>
+Again, adopt the normal convention for the way in which the correlation identifier of a reply message is derived.<br>
+The logic for receiving the replies is now simpler as each reply message has the same correlation identifier.<br>
+All the client application has to do is to issue an MQGET call for each reply message using the same value in the <I>CorrelId</I> field as the selection criterion.<br>
+This automatically accommodates the fact that the reply messages may arrive on the reply-to queue in any order.
+<P>
+To see the third approach, click next to continue.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Sending requests to multiple servers</FONT>
+<br>
+It may be necessary that every message should have a unique message identifier - for audit trail purposes, for example.<br>
+In this case, the same basic approach can be adopted, but with the modification that the CorrelId field is used to identify requests that are associated with the same business transaction.<br>
+To do this, the client application needs some means of generating a unique correlation identifier.<br>
+One way is to use the put message option MQPMO_NEW_CORREL_ID on the MQPUT call that creates the first request message.<br>
+The queue manager generates a unique correlation identifier, which it places in the <I>CorrelId</I> field of the message descriptor that accompanies the request message.<br>
+It  then returns the generated correlation identifier to the client application in the message descriptor.<br>
+The client application can then set the <I>CorrelId</I> field to this value for each subsequent request message.<br>
+The message identifier of each request message can now be unique.
+<P>
+The second modification that is required is for a server application.
+Instead of copying the MsgId of the request message to the CorrelId of the reply message, it just <I>passes</I> the Correlid from the request to the reply.
+This is done by simply copying  the contents of the <I>CorrelId</I> field of a request message into the <I>CorrelId</I> field of the reply message.<br>
+A client application may request this by setting the report option MQRO_PASS_CORREL_ID in the <I>Report</I> field of a request message.
+However, a server application must be programmed to inspect the <I>Report</I> field and do what the report option requests.<br>
+This option is described in Topic  “Replies and reports”.
+<P>
+The end result is the same as before. The logic for receiving the replies is simpler as each reply message has the same correlation identifier.
+<br><br><br>
+
+
+<FONT SIZE="+2">Specifying no selection criteria</FONT>
+<br>
+In order to retrieve the next message from a queue without specifying selection criteria, an application must set the <I>MsgId</I> field to MQMI_NONE and the <I>CorrelId</I> field to MQCI_NONE before issuing the MQGET call.
+This was first covered in Topic “The MQGET call”.
+<P>
+Additionally, as the message descriptor is also an output parameter on the MQGET call, these fields must be reset to MQMI_NONE and MQCI_NONE respectively prior to each subsequent MQGET call. <br>
+If these fields are not reset, they contain the message and correlation identifiers of the last message retrieved from the queue. <br>
+Therefore, when the next MQGET call is issued the queue manager assumes that the application wishes to retrieve a message with the specified message and correlation identifiers.<br>
+But there may not be another message on the queue with the same message and correlation identifiers as the last message retrieved.<br>
+In which case, the MQGET call fails with the reason code
+MQRC_NO_MSG_AVAILABLE.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Specifying no selection criteria</FONT>
+<br>
+In environments in which Version 2 or Version 3 of the get message options structure is supported, the need to reset the <I>MsgId</I> and <I>CorrelId</I> fields can be avoided.
+In a Version 2 or Version 3 get message options structure, there is a field called <I>MatchOptions</I>.
+If this field is set to MQMO_NONE on an MQGET call, it specifies that no selection criteria are to be used.
+This option takes effect whatever the contents of the <I>MsgId</I> and <I>CorrelId</I> fields prior to the MQGET call.
+As the <I>MatchOptions</I> field is only an input field on an MQGET call, its value does not need to be reset prior to each MQGET call.
+<P>
+The initial value of the <I>MatchOptions</I> field is MQMO_MATCH_MSG_ID + MQMO_MATCH_CORREL_ID
+This means that the input values of the <I>MsgId</I> and <I>CorrelId</I> fields are to be used as selection criteria on an MQGET call.
+If an application retains this initial value of <I>MatchOptions</I>, it must reset the <I>MsgId</I> field to MQMI_NONE and the <I>CorrelId</I> field to MQCI_NONE before an MQGET call in order to retrieve the next message from a queue without specifying selection criteria. An application can only avoid having to reset the <I>MsgId</I> and <I>CorrelId</I> fields by changing the value of the <I>MatchOptions</I> field to MQMO_NONE.
+<P>
+The <I>MatchOptions</I> field has data type MQLONG.
+<br><br><br>
+
+
+<FONT SIZE="+2">Specifying no selection criteria</FONT>
+<br>
+In order to use a Version 2 or Version 3 get message options structure an application must set the <I>Version</I> field in the structure to MQGMO_VERSION_2 or MQGMO_VERSION_3 respectively.
+This is because the initial value of this field is MQGMO_VERSION_1.
+<br><br><br>
+
+
+<FONT SIZE="+2">Specifying selection criteria</FONT>
+<br>
+Instead of retrieving the next available message from a queue, an application may select a particular message by specifying selection criteria. Two of the fields in the message descriptor which may be used to specify selection criteria are <I>MsgId</I> and <I>CorrelId</I>. The other three are introduced in Topic “Message segmentation”.
+<P>
+By setting a value in the <I>MsgId</I> field before issuing an MQGET call, only a message that has a message identifier with the specified value is returned by the call. Similarly, by setting a value in the <I>CorrelId</I> field before issuing an MQGET call, only a message that has a correlation identifier with the specified value is returned by the call.<br>
+Additionally, an application may set both the <I>MsgId</I> and <I>CorrelId</I> fields before issuing an MQGET call in order to select a message with a specific message identifier and a specific correlation identifier.
+<P>
+Click each block of code in turn to see some examples.
+<br><br><br>
+
+
+</font>
+</body>
+</html>

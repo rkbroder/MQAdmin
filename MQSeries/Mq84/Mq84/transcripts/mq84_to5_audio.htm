@@ -1,0 +1,100 @@
+<html>
+<head><title>Topic 5 - The MQCLOSE call - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 5: The MQCLOSE call</h1>
+
+<FONT SIZE="+2">What happens on an MQCLOSE call?</FONT>
+<br>
+There are three input parameters on an MQCLOSE call:<br>
+<ul>
+<li>A connection handle, an object handle and a close option. 
+The connection handle was returned by a previous MQCONN call.
+<li>The object handle was returned by a previous MQOPEN call.
+<li>The close option controls the action of MQCLOSE.
+</ul>
+<P>
+Only a dynamic queue can be closed in more than one way - it can either be retained or deleted.<br>
+You will look more closely at this option later in the topic.
+<P>
+This shows the name of the parameters as they appear in the <I>MQSeries Application Programming Reference</I>.
+<P>
+Move the mouse over each name for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">What happens on an MQCLOSE call?</FONT>
+<br>
+When the queue manager receives control, it performs a number of tasks.
+For example, it checks that the close option is valid for the type of queue being closed.
+<P>
+If the queue is a permanent dynamic queue and the application has requested that it be deleted, the queue manager may need to check that the application is authorized to perform this operation on the queue.
+<P>
+Provided everything is in order, the queue manager closes the queue.
+The application relinquishes access to the queue and the object handle
+becomes invalid.
+<br><br><br>
+
+<FONT SIZE="+2">What happens on an MQCLOSE call?</FONT>
+<br>
+There are three output parameters on an MQCLOSE call:<br>
+An object handle, a completion code and a reason code.
+<P>
+The object handle is set to be no longer valid if the call is successful.
+<P>
+On all platforms except OS/390, the value is MQHO_UNUSABLE_HOBJ.
+On OS/390, the value is undefined.
+<P>
+Move the mouse over each name for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+<FONT SIZE="+2">What happens on an MQCLOSE call?</FONT>
+<br>
+The diagram now shows the order of the parameters as they appear in an MQCLOSE call.
+<P>
+An object handle will be automatically set invalid at the end of a unit of parallel execution.
+<P>
+This means, that an MQCLOSE call can be omitted at the end of a program.
+<P>
+However, an application should issue an MQCLOSE call for each object handle that has been returned by a previous MQOPEN call.<br>
+This rule applies to all environments, including those where an application may attach multiple threads (or TCBs on OS/390).
+<P>
+It is not possible to close multiple queues with one single MQCLOSE call because only one object handle can be specified as a parameter on an MQCLOSE call.
+<br><br><br>
+
+<FONT SIZE="+2">The close options</FONT>
+<br>
+A close option controls the action of the MQCLOSE call.
+<p>
+One, and only one, option must be specified on each MQCLOSE call.<br>
+The close option only applies to dynamic queues.
+<P>
+A dynamic queue may be retained or deleted depending on the option specified.<br>
+The available options are shown here.
+<P>
+Click each option in turn to see a description of it.
+<br><br><br>
+
+<FONT SIZE="+2">Reason codes</FONT>
+<br>
+There are many reason codes that may be returned by the MQCLOSE call.<br>
+Just a few of them are shown here.
+<P>
+You will find the complete list, along with full descriptions, in the <I>MQSeries Application Programming Reference</I>.
+<P>
+Click each reason code in turn to see its meaning.
+<br><br><br>
+
+<FONT SIZE="+2">Coding the MQCLOSE call</FONT>
+<br>
+Here is an example of how to code the MQCLOSE call.  Click each block of pseudocode in turn to read a commentary on what the code does.
+<P>
+Refer to the <I>MQSeries Application Programming Reference</I> if you wish to see examples, in the programming language that you use, of how the parameters of an MQCLOSE call are declared, and the format of the call.
+<br><br><br>
+
+
+</font>
+</body>
+</html>

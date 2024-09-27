@@ -1,0 +1,515 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+
+
+<title>How To Use This Application</title>
+
+<style>
+  .invisible {position:absolute; visibility:hide;}
+  .invisible2 {position:relative;}
+  .undecorated {text-decoration:none;color:white;}
+  .decorated {color:#E44820;font-weight:bold;}
+  .special {text-decoration:none;color:#E44820;font-weight:bold;}
+  #wrap {position:relative; visibility:show;}
+  #logo {position:absolute; visibility:show;}
+  #leftcol {position:relative; visibility:show;clip:rect(0,100%,0,0);layer-background-color:#E44820}
+</style>
+
+<script src="bootstrap.js">
+</script>
+<script>
+var bNS = (((navigator.appName=="Netscape")&&(parseFloat(navigator.appVersion)>=4.06)));
+var bIE = (((navigator.appName=="Microsoft Internet Explorer")&&((index=navigator.appVersion.indexOf("MSIE "))>-1)&&(((parseFloat(navigator.appVersion.substring(index+5))==4.01)&&(navigator.appMinorVersion.indexOf("SP1")>-1))||(parseFloat(navigator.appVersion.substring(index+5))>4.01))));
+if (!bNS && !bIE)
+  document.location.replace("unsupported.html");
+function showmanual() {
+  if (bIE) {
+	  manual.style.display = "inline";
+	  prog.style.display = "none";
+	  prog1.style.display = "none";
+	  prog2.style.display = "none";
+	  prog3.style.display = "none";
+	  reference.style.display = "none";
+	  logo.style.display = "none";
+	}
+  else {
+    manual.visibility = "show";
+    prog.visibility = "hide";
+    prog1.visibility = "hide";
+    prog2.visibility = "hide";
+    prog3.visibility = "hide";
+    reference.visibility = "hide";
+    logo.visibility = "hide";
+    leftcol.clip.bottom = (manual.pageY + manual.clip.bottom) - leftcol.pageY;
+
+  }
+}
+function showprog() {
+  if (bIE) {
+	  manual.style.display = "none";
+	  prog.style.display = "inline";
+	  prog1.style.display = "none";
+	  prog2.style.display = "none";
+	  prog3.style.display = "none";
+	  reference.style.display = "none";
+	  logo.style.display = "none";
+	}
+  else {
+    manual.visibility = "hide";
+    prog.visibility = "show";
+    prog1.visibility = "hide";
+    prog2.visibility = "hide";
+    prog3.visibility = "hide";
+    reference.visibility = "hide";
+    logo.visibility = "hide";
+    leftcol.clip.bottom = (prog.pageY + prog.clip.bottom) - leftcol.pageY;
+  }
+}
+function showprog1() {
+  if (bIE) {
+	  manual.style.display = "none";
+	  prog.style.display = "none";
+	  prog1.style.display = "inline";
+	  prog2.style.display = "none";
+	  prog3.style.display = "none";
+	  reference.style.display = "none";
+	  logo.style.display = "none";
+	}
+  else {
+    manual.visibility = "hide";
+    prog.visibility = "hide";
+    prog1.visibility = "show";
+    prog2.visibility = "hide";
+    prog3.visibility = "hide";
+    reference.visibility = "hide";
+    logo.visibility = "hide";
+    leftcol.clip.bottom = (prog1.pageY + prog1.clip.bottom) - leftcol.pageY;
+  }
+}
+function showprog2() {
+  if (bIE) {
+	  manual.style.display = "none";
+	  prog.style.display = "none";
+	  prog1.style.display = "none";
+	  prog2.style.display = "inline";
+	  prog3.style.display = "none";
+	  reference.style.display = "none";
+	  logo.style.display = "none";
+	}
+  else {
+    manual.visibility = "hide";
+    prog.visibility = "hide";
+    prog1.visibility = "hide";
+    prog2.visibility = "show";
+    prog3.visibility = "hide";
+    reference.visibility = "hide";
+    logo.visibility = "hide";
+    leftcol.clip.bottom = (prog2.pageY + prog2.clip.bottom) - leftcol.pageY;
+  }
+}
+function showprog3() {
+  if (bIE) {
+	  manual.style.display = "none";
+	  prog.style.display = "none";
+	  prog1.style.display = "none";
+	  prog2.style.display = "none";
+	  prog3.style.display = "inline";
+	  reference.style.display = "none";
+	  logo.style.display = "none";
+	}
+  else {
+    manual.visibility = "hide";
+    prog.visibility = "hide";
+    prog1.visibility = "hide";
+    prog2.visibility = "hide";
+    prog3.visibility = "show";
+    reference.visibility = "hide";
+    logo.visibility = "hide";
+    leftcol.clip.bottom = (prog3.pageY + prog3.clip.bottom) - leftcol.pageY;
+  }
+}
+function showreference() {
+  if (bIE) {
+	  manual.style.display = "none";
+	  prog.style.display = "none";
+	  prog1.style.display = "none";
+	  prog2.style.display = "none";
+	  prog3.style.display = "none";
+	  reference.style.display = "inline";
+	  logo.style.display = "none";
+	}
+  else {
+    manual.visibility = "hide";
+    prog.visibility = "hide";
+    prog1.visibility = "hide";
+    prog2.visibility = "hide";
+    prog3.visibility = "hide";
+    reference.visibility = "show";
+    logo.visibility = "hide";
+    leftcol.clip.bottom = (reference.pageY + reference.clip.bottom) - leftcol.pageY;
+  }
+}
+function init() {
+  if (bIE) {
+  	manual.style.display = "none";
+  	prog.style.display = "none";
+  	prog1.style.display = "none";
+  	prog2.style.display = "none";
+  	prog3.style.display = "none";
+  	reference.style.display = "none";
+    manual.className = "invisible2";
+    prog.className = "invisible2";
+    prog1.className = "invisible2";
+    prog2.className = "invisible2";
+    prog3.className = "invisible2";
+    reference.className = "invisible2";
+  }
+  else {
+    manual = document.layers["wrap"].document.layers["manual"];
+    prog = document.layers["wrap"].document.layers["prog"];
+    prog1 = document.layers["wrap"].document.layers["prog1"];
+    prog2 = document.layers["wrap"].document.layers["prog2"];
+    prog3 = document.layers["wrap"].document.layers["prog3"];
+    reference = document.layers["wrap"].document.layers["reference"];
+    logo = document.layers["wrap"].document.layers["logo"];
+    leftcol = document.layers["leftcol"];
+  }  
+}
+</script>
+<meta name="Microsoft Theme" content="none, default"><meta name="Microsoft Border" content="none, default"></head>
+
+<body bgcolor="#FFFFF0" onload="init()">
+<ilayer id="layer1" src="scriptlet.html" width="0" height="0">
+</ilayer>
+<IFRAME id="frame1" src="scriptlet.html" width="0" height="0">
+</IFRAME>
+<OBJECT ID="Scriptlet1" TYPE="text/x-scriptlet" WIDTH=0 HEIGHT=0>
+<PARAM NAME="url" VALUE="./scriptlet.html">
+</OBJECT>
+
+<table id="tab" border="0" width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+    <td width="25%" bgcolor="#E44820" checked="false" valign="top" align="left">&nbsp;</td>
+    <td width="75%" checked="false" valign="top" align="left">
+    <img src="resources/biglogo.gif">
+    <h1 class="special">How To Use This Application</h1>
+    <p>This document contains suggestions for various ways you can launch this application.
+    Please refer to the product documentation for complete details. You can also find
+    late-beaking information and product news on the
+    <a class="decorated" href="http://www.asymetrix.com/" target="_blank"><b>Asymetrix Web site</b></a>.
+    <br><br><br>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" bgcolor="#E44820" valign="top" align="left">
+    <p><font color="#FFFFFF">
+      <a class="undecorated" href="javascript:showmanual()"><b>Manual Launch</b></a>
+      </font></p>
+    <p><font color="#FFFFFF">
+    <a class="undecorated" href="javascript:showprog()"><b>Programmatic Launch</b></a>
+    </font></p>
+
+    <ul>
+    <p><font color="#FFFFFF"><li>
+    <a class="undecorated" href="javascript:showprog1()">Using invisible
+    <font face="Courier New">&lt;IFRAME&gt;</font> or <font face="Courier New">&lt;ILAYER&gt;</font>
+    objects</a></font></p>
+    <p><font color="#FFFFFF"><li>
+    <a class="undecorated" href="javascript:showprog2()">Using scriptlets</a></font></p>
+    <p><font color="#FFFFFF"><li>
+    <a class="undecorated" href="javascript:showprog3()">Including the
+    <font face="Courier New">bootstrap.js</font> script</a></font></p>
+    </ul>
+
+    <p><font color="#FFFFFF">
+    <a class="undecorated" href="javascript:showreference()">
+    <b><font face="Courier New">bootstrap() Method Reference</font></b></a></font></p>
+    </td>
+    <td id="cell2" width="75%" valign="top" align="left">
+    
+    <div id="wrap">
+      <div id="manual" class="invisible">
+      <h2 class="special">Manual Launch</h2>
+      <p>This simplest way to launch the application is by directly opening its
+      <a class="decorated" href="index.html"
+      target="_blank">main page</a> in your browser. It will be displayed using the options
+      established at the time it was exported. The advantage of this approach is that it
+      requires no additional programming effort, beyond that of simply exporting it for the Web.</p>
+      <br>
+      <br>
+      <br>
+      <hr>
+      <table border="0" width="100%" cellspacing="0" cellpadding="4">
+        <tr>
+          <td width="100%" valign="top" align="right">
+            <font size=2>
+            © Copyright 1999 Asymetrix Learning Systems. All Rights Reserved.<br>
+            <a class="decorated" href="http://www.asymetrix.com" target="_blank">
+            <img vspace=12 border=0 src="resources/logo.gif" align="texttop">
+             </a>
+            </font>
+          </td>
+        <tr>
+      </table>
+      </div>
+      <div id="prog" class="invisible"><h2 class="special">Programmatic Launch</h2>
+      <p>The disadvantage of the manual approach is that it offers few facilties for integrating
+      this application with others, or with existing Web pages. To do this, several programmatic
+      alternatives are available.<ul>
+        <li><a class="decorated" href="javascript:showprog1()">Using invisible <font face="Courier New">&lt;IFRAME&gt;</font> or <font face="Courier New">&lt;ILAYER&gt;</font> objects</a></li>
+        <li><a class="decorated" href="javascript:showprog2()">Using scriptlets (Internet Explorer 4.x only)</a></li>
+        <li><a class="decorated" href="javascript:showprog3()">Including the <font face="Courier New">bootstrap.js</font> script</a></li>
+      </ul>
+      <p>In general, all the programmatic approaches allow arbitrary HTML pages to launch any
+      number of applications. Applications can be launched full-screen, in a new window, or even
+      in place, in another frame for example in the launching page. See the
+      <a class="decorated" href="javascript:showreference()">reference</a> section for details.</p>
+      <br>
+      <br>
+      <hr>
+      <table border="0" width="100%" cellspacing="0" cellpadding="4">
+        <tr>
+          <td width="100%" valign="top" align="right">
+            <font size=2>
+            © Copyright 1999 Asymetrix Learning Systems. All Rights Reserved.<br>
+            <a class="decorated" href="http://www.asymetrix.com" target="_blank">
+            <img vspace=12 border=0 src="resources/logo.gif" align="texttop">
+            </a>
+            </font>
+          </td>
+        <tr>
+      </table>
+      </div>
+      <div id="prog1" class="invisible"><h2 class="special">Programmatic Launch</h2>
+      <h3 class="special">Using an Invisible <font face="Courier New">&lt;IFRAME&gt;</font>
+      or <font face="Courier New">&lt;ILAYER&gt;</font></h3>
+      <p>Although this technique is essentially the same for both Internet Explorer and
+      Netscape, the details differ. The effect is the same: you can invoke your application from
+      any arbitrary page. The first task is to define an invisible container to hold the
+       application's code. </p>
+      <p>Under <strong>Internet Explorer</strong>, use the <font face="Courier New"><strong>&lt;IFRAME&gt;</strong></font>
+      tag:</p>
+      <blockquote>
+      <p><font face="Courier New">&lt;IFRAME id=&quot;frame1&quot;<br>SRC=</font><font face="Courier New">&quot;http://myserver/scriptlet.html&quot;<br>
+      WIDTH=0 HEIGHT=0&gt;<br>&lt;IFRAME&gt;</font></p>
+      </blockquote>
+      <p>Under <strong>Netscape</strong>, use its <font face="Courier New"><strong>&lt;ILAYER&gt;</strong></font>
+      tag:</p>
+      <blockquote>
+       <p><font face="Courier New">&lt;ILAYER id=&quot;layer1&quot;<br>SRC=</font><font face="Courier New">&quot;http://myserver/scriptlet.html&quot;<br>
+       WIDTH=0 HEIGHT=0&gt;<br>&lt;ILAYER&gt;</font></p>
+      </blockquote>
+      <p>The SRC to both is that of this application's scriptlet page, <font face="Courier New">scriptlet.html</font>.
+      Don't be alarmed by the word &quot;scriptlet&quot; in this context. This is just a version
+      of the application that does nothing until you tell it to. These invisible objects now
+      expose a method,
+      <a class="decorated" href="javascript:showreference()">
+      <font face="Courier New">bootstrap()</font></a>,
+      that you can invoke from any JavaScript or VBScript on your page. </p>
+      <p>For example, under <strong>Internet Explorer</strong>, you could code a hyperlink to
+      the application like this:</p>
+      <blockquote>
+        <p><font face="Courier New">&lt;a href=&quot;javascript:frame1.bootstrap<br>
+        ('http://myserver/index.html',<br>'fullscreen','window',document)&quot;&gt;<br>
+        </font>
+        <a class="decorated" href="javascript:frame1.bootstrap('./index.html','fullscreen','window',document)">
+        <font face="Courier New">Click to launch full-screen in Internet Explorer</font></a><font face="Courier New">&lt;/a&gt;</font></p>
+      </blockquote>
+      <p>Under <strong>Netscape</strong>, the hyperlink looks like this:</p>
+      <blockquote>
+        <p><font face="Courier New">&lt;a href=&quot;javascript:document.layer1.bootstrap<br>
+        ('http://myserver/index.html',<br>'fullscreen','window',document)&quot;&gt;<br>
+        </font><a class="decorated" href="javascript:document.layer1.bootstrap('./index.html','fullscreen','window',document)"><font face="Courier New">Click to launch full-screen in Netscape</font></a><font face="Courier New">&lt;/a&gt;</font></p>
+      </blockquote>
+      <br>
+      <br>
+      <hr>
+      <table border="0" width="100%" cellspacing="0" cellpadding="4">
+        <tr>
+          <td width="100%" valign="top" align="right">
+            <font size=2>
+            © Copyright 1999 Asymetrix Learning Systems. All Rights Reserved.<br>
+            <a class="decorated" href="http://www.asymetrix.com" target="_blank">
+            <img vspace=12 border=0 src="resources/logo.gif" align="texttop">
+            </a>
+            </font>
+          </td>
+        <tr>
+      </table>
+     </div>
+     <div id="prog2" class="invisible"><h2 class="special">Programmatic Launch</h2>
+     <h3 class="special">Using Scriptlets</h3>
+     <p>Under Internet Explorer 4.x and higher, you can invoke this application from an
+     arbitrary HTML page via a scriptlet. First, create an <font face="Courier New">&lt;OBJECT&gt;</font>
+     tag like this.</p>
+     <blockquote>
+       <p><font face="Courier New">&lt;OBJECT ID=&quot;Scriptlet1&quot;
+       <br>TYPE=&quot;text/x-scriptlet&quot; WIDTH=0 HEIGHT=0&gt;<br>
+       &lt;PARAM NAME=&quot;url&quot; VALUE=&quot;http://myserver/scriptlet.html&quot;&gt;<br>
+       &lt;/OBJECT&gt;</font></p>
+     </blockquote>
+     <p>The URL is that of this application's scriptlet page, <font face="Courier New">scriptlet.html</font>.
+     This scriptlet now exposes a method, <a class="decorated" href="javascript:showreference()"><font face="Courier New">bootstrap()</font></a>, that you can invoke from any JavaScript or
+     VBScript on your page. For example, you could code a hyperlink to the application:</p>
+     <blockquote>
+       <p><font face="Courier New">&lt;a href=&quot;javascript:Scriptlet1.bootstrap<br>
+       ('http://myserver/index.html',<br>'window','inplace',document)&quot;&gt;<br>
+       </font><a class="decorated" href="javascript:Scriptlet1.bootstrap('./index.html','window','inplace',document)"><font face="Courier New">Click to launch in an Internet Explorer window</font></a><font face="Courier New">&lt;/a&gt;</font></p>
+     </blockquote>
+     <p>Like the <font face="Courier New">&lt;IFRAME&gt;</font> technique, you can code many
+     such scriptlets in a single page, all referencing different applications.</p>
+     <br>
+     <br>
+     <hr>
+     <table border="0" width="100%" cellspacing="0" cellpadding="4">
+       <tr>
+         <td width="100%" valign="top" align="right">
+           <font size=2>
+           © Copyright 1999 Asymetrix Learning Systems. All Rights Reserved.<br>
+           <a class="decorated" href="http://www.asymetrix.com" target="_blank">
+           <img vspace=12 border=0 src="resources/logo.gif" align="texttop">
+           </a>
+           </font>
+         </td>
+       <tr>
+     </table>
+     </div>
+     <div id="prog3" class="invisible"><h2 class="special">Programmatic Launch</h2>
+     <h3 class="special">Including the <font face="Courier New">bootstrap.js</font> Script</h3>
+     <p>Although this technique works for both Internet Explorer and Netscape, it is more
+     naturally used in Netscape where scriptlets are not available. First, load the <font face="Courier New">bootstrap.js</font> script of this application into any arbitrary page.
+     For example, it is loaded into this one. Here's how to do it:</p>
+     <blockquote>
+       <p><font face="Courier New">&lt;HEAD&gt;<br>
+       &lt;SCRIPT SRC=&quot;http://myserver/bootstrap.js&quot;&gt;<br>
+       &lt;/SCRIPT&gt;<br>
+       &lt;/HEAD&gt;</font></p>
+     </blockquote>
+     <p>Now the same <a class="decorated" href="javascript:showreference()"><font face="Courier New">bootstrap()</font></a>method
+     described earlier for scriptlets is available. </p>
+     <p>For example, you could code a hyperlink to the application:</p>
+     <blockquote>
+       <p><font face="Courier New">&lt;a href=&quot;javascript:bootstrap<br>
+       ('http://myserver/index.html',<br>'window','inplace',document)&quot;&gt;<br>
+       </font><a class="decorated" href="javascript:bootstrap('./index.html','window','inplace',document)"><font face="Courier New">Click to launch in a new window</font></a><font face="Courier New">&lt;/a&gt;</font></p>
+     </blockquote>
+     <br>
+     <br>
+     <hr>
+     <table border="0" width="100%" cellspacing="0" cellpadding="4">
+       <tr>
+         <td width="100%" valign="top" align="right">
+           <font size=2>
+           © Copyright 1999 Asymetrix Learning Systems. All Rights Reserved.<br>
+           <a class="decorated" href="http://www.asymetrix.com" target="_blank">
+           <img vspace=12 border=0 src="resources/logo.gif" align="texttop">
+           </a>
+           </font>
+         </td>
+       <tr>
+     </table>
+     </div>
+     <div id="reference" class="invisible"><h2 class="special">bootstrap() Method Reference</h2>
+     <p><font face="Courier New">
+     bootstrap(url, dhtmlActivation, htmlActivation, target)
+     </font></p>
+     <br>
+     <table border="1" cellpadding="4" cellspacing="0" width="100%">
+       <tr>
+         <td valign="top" width="25%"><font face="Courier New">url</font></td>
+         <td valign="top" width="75%">An absolute or relative URL to the main page (<font face="Courier New">index.html</font>) of the application to be launched. This parameter is
+         necessary because <font face="Courier New">bootstrap()</font> can be called from any
+         arbitrary page, from any location.</td>
+       </tr>
+       <tr>
+         <td valign="top" width="25%"><font face="Courier New">dhtmlActivation</font></td>
+         <td valign="top" width="75%">The activation or launch policy for the <em>DHTML</em> pages
+         of the application. These pages are those designed to run under 4.x browsers or higher.<ul>
+           <li><font face="Courier New">'fullscreen'</font> invokes the application in full-screen
+             mode.</li>
+           <li><font face="Courier New">'window'</font> invokes the application in a new window, the
+             size of which was specified when the application was created.</li>
+           <li><font face="Courier New">'inplace'</font> invokes the application in a frame,
+           or can be used to overwrite the contents of the current window.
+           See the <font face="Courier New">target</font> parameter for details.</li>
+         </ul>
+         </td>
+       </tr>
+       <tr>
+         <td valign="top" width="25%"><font face="Courier New">htmlActivation</font></td>
+         <td valign="top" width="75%">The activation or launch policy for the <em>HTML</em> pages
+         of the application. These pages are those designed to run under 3.x browsers or lower.<ul>
+           <li><font face="Courier New">'window'</font> invokes the application in a new window,
+             created with the same appearance as the current window.</li>
+           <li><font face="Courier New">'inplace'</font> invokes the application in a frame of the
+             current window, or can be used to overwrite the contents of the current window. See the <font face="Courier New">target</font> parameter for details.</li>
+         </ul>
+         </td>
+       </tr>
+       <tr>
+         <td valign="top" width="25%"><font face="Courier New">target</font></td>
+         <td valign="top" width="75%">If <font face="Courier New">'inplace'</font> was used as an
+         activation policy, this parameter identifies the document in the current window in which
+         the application will be launched. <p>It could be the main document, for example, in which
+         case the application will overwrite the contents of the current window. Alternatively, the
+         document of another frame could be specified.</p>
+         <p>For example, this hyperlink launches an application inside this window:</p>
+           <p><font face="Courier New">&lt;a href=&quot;javascript:bootstrap<br>
+           ('http://myserver/index.html',<br>
+           'inplace','inplace',document)&quot;&gt;<br>
+           </font><a class="decorated" href="javascript:bootstrap('./index.html','inplace','inplace',document)">
+           <font face="Courier New">Click to launch in this window</font></a>
+           <font face="Courier New">&lt;/a&gt;</font></p>
+         </td>
+       </tr>
+     </table>
+     <br>
+     <br>
+     <hr>
+     <table border="0" width="100%" cellspacing="0" cellpadding="4">
+       <tr>
+         <td width="100%" valign="top" align="right">
+           <font size=2>
+           © Copyright 1999 Asymetrix Learning Systems. All Rights Reserved.<br>
+           <a class="decorated" href="http://www.asymetrix.com" target="_blank">
+           <img vspace=12 border=0 src="resources/logo.gif" align="texttop">
+           </a>
+           </font>
+         </td>
+       </tr>
+     </table>    
+     </div>
+     <br><br><br><br><br><br><br><br><br><br><br><br>
+       <div id="logo">
+       <hr>
+       <table border="0" width="100%" cellspacing="0" cellpadding="4">
+         <tr>
+           <td width="100%" valign="top" align="right">
+             <font size=2>
+             © Copyright 1999 Asymetrix Learning Systems. All Rights Reserved.<br>
+             <a class="decorated" href="http://www.asymetrix.com" target="_blank">
+             <img vspace=12 border=0 src="resources/logo.gif" align="texttop">
+             </a>
+             </font>
+           </td>
+         </tr>
+       </table> 
+       </div>   
+    </div> 
+    </td>
+  </tr>  
+</table>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td id="cell" width="25%" bgcolor="#E44820" checked="false" valign="top" align="left">&nbsp;
+      <div id="leftcol">
+      </div>
+    </td>
+    <td width="75%" checked="false" valign="top" align="left">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

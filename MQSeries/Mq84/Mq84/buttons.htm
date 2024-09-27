@@ -1,0 +1,33 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head>
+<SCRIPT LANGUAGE="JavaScript" SRC="buttons.js"></SCRIPT>
+<LINK REL=stylesheet TYPE="text/css" HREF="Architecture.css" TITLE="style">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>buttons...</title>
+</HEAD>
+
+<BODY bgcolor="#9900cd" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLL="NO" onLoad="
+     if(is.ns4) {
+          available_width=innerWidth;
+          available_height=innerHeight;
+          preLoad();
+     } else if(is.ie4) {
+          available_width=document.body.clientWidth;
+          available_height=document.body.clientHeight;
+          preLoad();
+     }"
+
+onResize="history.go(0)">
+
+<DIV ID="buttonLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+ <a href="javascript:void(null)" onclick="parent.document.location.href = 'menu.htm'">
+   <img src="media/G3130b.jpg" border=0 alt="Course menu">
+</a>
+</DIV>
+
+<DIV ID="textLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+</body>
+</html>

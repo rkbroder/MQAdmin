@@ -1,0 +1,162 @@
+<html>
+<head><title>Topic 1 - A Review of MQSeries - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 1: A review of MQSeries</h1>
+
+<FONT SIZE="+2">What is the problem?</FONT>
+<br>
+Most organisations today need to be able to connect applications together. This includes connecting to applications over a network, and to applications in other organisations such as customers and suppliers.
+<P>
+Such a network often has a mixture of hardware and software platforms, and a mixture of communications protocols. Within the network, there may also be legacy applications that need to be connected.
+<P>
+The problem, therefore, is application intercommunication within a heterogeneous network. Without MQSeries, complex communications programming may be required to connect the various applications together, but MQSeries provides a simple and reliable way of doing this.
+<br><br><br>
+
+<FONT SIZE="+2">What is MQSeries?</FONT>
+<br>
+MQSeries is a means of program to program communication.
+<P>
+Here you see the basic mechanism by which this communication takes place. The sending application prepares a message and puts it on a queue. The receiving application then gets the message from the queue, processes it, and eventually sends a reply back to the sender. So, the communciation may be done in both directions.
+<P>
+The application programming interface that is used to put a message on a queue and get a message from a queue is called the <I>Message Queue Interface</I>, or the MQI. It is a simple call interface.
+<P>
+The MQI encourages an asynchronous mode of application design. This means that after an application has put a message on a queue it is free to continue with other processing. The application does not have to wait for a reply, if one is expected.
+<P>
+A message is stored safely on a queue until an application is ready to receive it. The two applications that use a message to exchange data do not need to establish and maintain any form of connection with each other.
+<P>
+MQSeries can be used to implement message driven processing. This means that application execution can be driven by the arrival of messages on a queue.
+<br><br><br>
+
+<FONT SIZE="+2">What is a message?</FONT>
+<br>
+A message has two parts, a <I>message descriptor</I> and the <I>application data</I>.
+<P>
+The message descriptor contains fields that specify certain control information about the message such as an identifier for the message.
+The format of a message descriptor is fixed and is documented in the MQSeries Application Programming Reference, known as the APR.
+<P>
+The application data is the actual data sent from the sending application to the receiving application.
+It can be any data and is determined solely by the application requirements.
+<P>
+When an application gets a message from a queue, both the message descriptor and the application data are made available to the application.
+<br><br><br>
+
+<FONT SIZE="+2">What is a queue?</FONT>
+<br>
+In MQSeries, a queue is a place where messages can be stored.
+<P>
+There are two basic operations that can be performed on a queue. They are adding a message to the end of a queue, and removing a message from the front of the queue.
+In MQSeries, these operations are called “putting” and “getting” messages.
+<P>
+Messages in a queue are delivered in first-in first-out or priority sequence, whatever is defined for the queue.
+<P>
+Every queue has a name. Applications must open a queue specified by its name before they can put and get messages from it.
+<br><br><br>
+
+<FONT SIZE="+2">What is a queue manager?</FONT>
+<br>
+The component of MQSeries that owns and manages queues is called a <I>queue manager</I>.
+<P>
+Every queue manager has a name. Through the MQI, an application is able to specify the name of the queue manager whose queues it needs to access.
+The queue is able to support multiple, concurrent applications accessing its queues.
+<P>
+A queue manager provides system administration interfaces to allow an MQSeries administrator to create, alter or  delete a queue, start or stop a queue manager,
+permit access to queues and perform other administrative tasks.
+<br><br><br>
+
+<FONT SIZE="+2">MQSeries objects</FONT>
+<br>
+A queue is an example of an <I>MQSeries object</I>. Every MQSeries object has a set of <I>attributes</I> which specify the properties of the object.
+<P>
+MQSeries objects are owned and managed by a queue manager.
+<P>
+MQSeries objects are created and maintained by using the system administration interfaces provided by the queue manager.
+<P>
+There are other types of MQSeries objects besides queues.
+Here you can see only those that can be accessed through the MQI. That is, a namelist, a process and a queue manager.
+
+<UL>
+<LI>Essentially, the namelist is a list of names which are usually the names of queues
+<LI>The process defines the properties of an application that can be started automatically by a trigger monitor
+<LI>The queue manager defines the properties of the queue manager itself.
+</UL>
+
+Click each type of MQSeries object to see examples of the attributes associated with that object type. Each attribute is represented by its name, as it is documented in the <I>APR</I>, and its meaning.
+<br><br><br>
+
+<FONT SIZE="+2">Queue managers in a network</FONT>
+<br>
+It is possible for communicating applications to be on separate systems.
+<P>
+One way of enabling two communicating applications to be on separate systems is to have a queue manager on each system. Both queue managers are connected and send messages over a communication connection.
+<P>
+The movement of messages from one queue manager to another is transparent to the applications and is performed asynchronously with respect to their execution. The queue managers use a communications protocol such as SNA LU6.2, TCP/IP, or NetBIOS to move the messages. In essence, if you use MQSeries, all the communications programming has been done for you.
+<P>
+The queue managers also use a higher level protocol which ensures that every message is delivered once and once only, even if the communications connection fails or there is a failure on either system. This is known as the <I>assured delivery</I> property of MQSeries.
+<br><br><br>
+
+<FONT SIZE="+2">MQSeries client applications</FONT>
+<br>
+An application that issues MQI calls to a queue manager does not have to be executing on the same system as the queue manager. Here you see an example of an application on one system putting a message on a queue owned by a queue manager on another system. Such an application is called an <I>MQSeries client</I> application.
+<P>
+The system on which the <B>client application</B> is running is called the <I>client system</I>, and the system on which the <B>queue manager</B> is running is called the <I>server system</I>.
+<P>
+A queue manager is able to support multiple, concurrent client applications running on different systems,  as well as multiple, concurrent applications that are running on the same system.
+<P>
+The use of MQSeries client applications is another way of enabling two communicating applications to be on separate systems.
+<P>
+The MQI calls from a client application to a server queue manager are made over a communications connection. A fast, reliable communications connection is therefore required.
+<br><br><br>
+
+<FONT SIZE="+2">The MQSeries products</FONT>
+<br>
+An MQSeries product provides all the function needed to create and operate a queue manager. Here is a list of the MQSeries products. Note that the name of each product commences with the words “MQSeries for ...”.
+<P>
+Most of the MQSeries products are available from IBM. You should consult the documentation for details.
+<br><br><br>
+
+<FONT SIZE="+2">The MQSeries platforms</FONT>
+<br>
+An MQSeries platform is a system environment in which an application can issue calls to the MQI. Here are the MQSeries platforms.
+There are three groups of platforms: The first group contains those platforms which can function as a client and as a server, the second contains those platforms which function as a server, and the third contains client only platforms.
+<P>
+Only an MQSeries for Windows queue manager is unable to support the attachment of MQSeries client applications.
+<P>
+Support for most of the platforms is available from IBM, and again you should consult the documentation for details.
+<br><br><br>
+
+<FONT SIZE="+2">The supported programming languages</FONT>
+<br>
+Here is a list of all the programming languages on the IBM supported MQSeries platforms, that can be used to write applications that issue calls to the MQI.
+<P>
+The C programming language is supported on all platforms, and COBOL is supported on all platforms except DOS, NCR UNIX, and Windows 3.1.
+Also, it is not supported for use with MQSeries for Windows.
+<P>
+Assembler is only supported by MQSeries for OS/390, RPG by MQSeries for AS/400, and TAL by MQSeries for Tandem NonStop Kernel.
+<P>
+All the remaining programming languages are supported on at least two platforms.
+<P>
+Only C and COBOL are used in this course.
+<br><br><br>
+
+<FONT SIZE="+2">MQSeries on UNIX systems</FONT>
+<br>
+The term “MQSeries on UNIX systems” is used to refer to these MQSeries products.
+<br><br><br>
+
+<FONT SIZE="+2">UNIX systems</FONT>
+<br>
+The term “UNIX systems” is used to refer to these operating systems.
+<br><br><br>
+
+<FONT SIZE="+2">Version 5</FONT>
+<br>
+The MQSeries products here are referred to as “Version 5”, “Version 5 products”,
+or “products on Version 5 platforms.”
+<br><br><br>
+
+</font>
+</body>
+</html>

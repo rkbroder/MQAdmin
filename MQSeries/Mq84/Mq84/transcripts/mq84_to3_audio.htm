@@ -1,0 +1,166 @@
+<html>
+<head><title>Topic 3 - The MQCONN call - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 3: The MQCONN call</h1>
+
+<FONT SIZE="+2">What happens on an MQCONN call?</FONT>
+<br>
+There is one input parameter on an MQCONN call: The name of a queue manager.  It identifies the queue manager to which the application wishes to connect.  <br>
+The name must not contain leading or embedded blanks but may contain trailing blanks. The first null character and characters following it are treated as blanks.  <br>
+A blank queue manager name denotes the default queue manager, unless the application is an MQSeries client application.
+<P>
+This shows the name of the parameter as it appears in the <I>MQSeries Application Programming Reference</I>.
+Move the mouse over the parameter for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">What happens on an MQCONN call?</FONT>
+<br>
+When the queue manager receives control, it performs a number of tasks.  <br>
+For example, it checks that the application is actually authorized to connect to it.<br>
+Provided everything is in order, the queue manager allows the application to connect to it and issue further MQI calls.
+<br><br><br>
+
+<FONT SIZE="+2">What happens on an MQCONN call?</FONT>
+<br>
+There are three output parameters on an MQCONN call:<br>
+A connection handle, a completion code and a reason code.
+<UL>
+<LI>The connection handle is a 32 bit binary value that represents the connection to the queue manager.
+It  must be specified as an input parameter on all subsequent MQI calls to the queue manager.
+<LI>The completion code indicates whether the call completed successfully, completed partially, or failed.
+<LI>The  reason code specifies the reason why the call failed or only completed partially.
+</UL>
+
+The diagram shows the name of the parameters as they appear in the <I>MQSeries Application Programming Reference</I>.
+<P>
+Move the mouse over the parameter for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+<FONT SIZE="+2">What happens on an MQCONN call?</FONT>
+<br>
+This is the format of the MQCONN call as it appears in the <I>MQSeries Application Programming Reference</I>. Note the order of the parameters.
+<P>
+The MQCONN call is not necessary on the OS/400 and CICS on OS390 platforms.<br>
+However, they are accepted and should  be included for reasons of portability and good programming practice.
+<br><br><br>
+
+<FONT SIZE="+2">The connection handle</FONT>
+<br>
+The connection handle must be specified as an input parameter on all subsequent MQI calls to the queue manager.
+<P>
+The queue manager uses the connection handle to identify the application issuing the call.
+<P>
+A connection handle becomes invalid when an MQDISC call is issued.  <br>
+That is, it can no longer be used as an input parameter on MQI calls.
+<P>
+If an application subsequently connects to the queue manager again, it will receive a different connection handle.
+<br><br><br>
+
+<FONT SIZE="+2">Completion codes</FONT>
+<br>
+A completion code and a reason code are returned as output parameters on every MQI call, not just an MQCONN call.
+<P>
+The completion code allows the application to determine quickly whether a call completed successfully, completed partially, or failed.  <br>
+If a call does not complete successfully, the reason code specifies the reason.
+<P>
+The only three completion codes are shown on the diagram.
+<P>
+Remember that a constant is normally referenced by name, not its actual value.
+If you wish to know the actual value of any named constant, please refer to the <I>MQSeries Application Programming Reference</I>.
+<P>
+Note that the name of each completion code commences with “MQCC_”.
+<P>
+Click each completion code in turn to see its meaning.
+<br><br><br>
+
+<FONT SIZE="+2">Reason codes</FONT>
+<br>
+There are many reason codes that may be returned by the MQCONN call.   <br>
+Just a few of them are shown here.  <br>
+You will find the complete list, along with full descriptions, in the <I>MQSeries Application Programming Reference</I>.
+Note that the name of every reason code commences with “MQRC_”.
+<P>
+As a general rule, if a reason code can be returned by more than one MQI call, this is stated when the reason code is first described. <BR>
+The reason code is then not listed subsequently in the topics on the other MQI calls.  However, a reason code may be listed again if there is some additional information to be provided.
+<P>
+Click each reason code in turn to see its meaning.
+<br><br><br>
+
+<FONT SIZE="+2">Scope of a connection handle</FONT>
+<br>
+Expressed generally, the scope of a connection handle is the smallest unit of parallel processing within the environment in which the application is executing.  <br>
+A connection handle is not valid outside the unit of parallel processing from which the MQCONN call was issued.
+<P>
+On the diagram, move the mouse over the application environments in which you are interested to read a more specific definition of the scope of a connection handle.
+<P>
+OS/390 is covered separately later in the topic.
+<br><br><br>
+
+<FONT SIZE="+2">Connecting to more than one queue</FONT>
+<br>
+Within the scope of a connection handle, it is not possible to connect to another queue manager.  <br>
+If this is attempted, the MQCONN call fails and the reason code MQRC_ANOTHER_Q_MGR_CONNECTED is returned.
+<P>
+However, if an MQDISC call is issued, so that the first connection handle ceases to be valid, the same unit of parallel processing may then issue an MQCONN call in order to connect to a different queue manager.  <br>
+This is shown on the diagram.
+<br><br><br>
+
+<FONT SIZE="+2">Connecting to more than one queue</FONT>
+<br>
+For an MQSeries client application, the rules are different.  <br>
+Within the scope of a connection handle, one or more MQCONN calls can be issued in order to connect to other queue managers.  <br>
+That is, the same unit of parallel processing may be connected to more than one queue manager concurrently.  <br>
+This is shown on the diagram.
+<br><br><br>
+
+<FONT SIZE="+2">An application with multiple threads</FONT>
+<br>
+On Digital OpenVMS or a UNIX system, each thread of an application must connect to the same queue manager in order to issue MQI calls.  <br>
+This is shown on the diagram.
+<br><br><br>
+
+<FONT SIZE="+2">An application with multiple threads</FONT>
+<br>
+On OS/2 Warp or Windows NT, each thread of an application may connect to a different queue manager.
+This is shown on the diagram.
+<P>
+Each thread of an MQSeries client application may also connect to a different queue manager, even if the client application is running on Digital OpenVMS or a UNIX system.
+<br><br><br>
+
+<FONT SIZE="+2">CICS applications on OS/390</FONT>
+<br>
+The CICS region itself is connected to a queue manager, not the individual CICS applications executing in that region.<BR>
+The connection is usually made automatically when a CICS region starts, but it can be started and stopped by the operator.<BR>
+A CICS region may be connected to only one queue manager, but multiple CICS regions may be connected to the same queue manager.
+<br><br><br>
+
+<FONT SIZE="+2">Batch, TSO and IMS applications on OS/390</FONT>
+<br>
+The following applies to batch, TSO, and IMS applications.  <br>
+On IMS, there is support for message processing programs (MPPs),
+interactive fast path programs (IFPs), and batch message processing programs (BMPs).
+<P>
+An application must issue an MQCONN call in order to specify the name of the queue manager to which it wishes to connect.<br>
+An application may connect to more than one queue manager concurrently on the same TCB. A different connection handle is returned by each successful MQCONN call. On subsequent MQI calls, a connection handle effectively identifies which queue manager the call is being directed at.
+<P>
+The scope of a connection handle is the TCB issuing the MQCONN call, excluding any attached TCBs. Therefore, if an application attaches additional TCBs, each TCB must issue a separate MQCONN call and acquire its own connection handle.  Each TCB may be connected to more than one queue manager concurrently.
+<br><br><br>
+
+
+<FONT SIZE="+2">Coding the MQCONN call</FONT>
+<br>
+Here is an example of how to code the MQCONN call. Click each block of pseudo-code in turn to read a commentary on what the code does.
+<P>
+Refer to the <I>MQSeries Application Programming Reference</I> if you wish to see examples, in the programming language that you use, of how the parameters of an MQCONN call are declared and the format of the call.
+<br><br><br>
+
+
+
+
+</font>
+</body>
+</html>

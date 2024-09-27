@@ -1,0 +1,141 @@
+<html>
+<head><title>Topic 14 - Triggering - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 14: Triggering</h1>
+
+<FONT SIZE="+2">What is triggering?</FONT>
+<br>
+MQSeries implements a mechanism that allows the event-controlled processing.<br>
+This mechanism is known as triggering.<br>
+How triggering is implemented in MQSeries, is shown here.
+<P>
+First, a message is put on a queue for which triggering is defined. This queue is called <I>application queue</I>.<br>
+Triggering is activated for a queue by setting the attribute <I>TriggerControl</I> of the queue to ON.<br>
+The trigger condition is defined with the attribute <I>Triggertype</I>.
+This attribute can be <I>First, Depth</I> or <I>Every</I>.
+<UL>
+<LI><I>First</I>, means the first message that is put in an empty queue causes triggering to happen
+<LI><I>Depth</I> means that triggering happens if the current queue depth reaches this threshold
+<LI><I>Every</I> means that every message that is put in a queue can cause triggering to happen
+</UL>
+In addition, the queue attribute <I>TriggerMsgPriority</I> can be used to specify the priority threshold of messages for which the above conditions are applied.
+<P>
+Complex rules govern the occurrence of a trigger event. See the <I>MQSeries Application Programming Guide</I>, known as the APG, for a full description.
+<br><br><br>
+
+
+<FONT SIZE="+2">What is triggering?</FONT>
+<br>
+When the queue manager decides that one of the necessary conditions for a trigger event has been met, it inspects the definition for the application queue to find the definition for a <I>process</I>.
+<P>
+A process is an MQSeries object that describes which application should be started, and which type of application it is.<br>
+For example, application types can be Windows, MVS, CICS or  IMS.
+<P>
+If there is a process defined for the queue and a process object with this name is found, then the queue manager creates a trigger message.<br>
+This message contains information about the queue that caused the trigger event and the process to be triggered.<br>
+The trigger message is then put on a queue known as <I>initiation queue</I>.
+The name of the initiation queue is defined for the application queue using the attribute INITQ.
+<br><br><br>
+
+<FONT SIZE="+2">What is triggering?</FONT>
+<br>
+The initiation queue is monitored by a long-running MQSeries application known as <I>Trigger Monitor</I>.
+<P>
+Trigger monitors are supplied with MQSeries for different environments such as CICS, IMS and MVS, with means Batch and TSO in a mainframe environment.
+Trigger monitors for batch processing and CICS are supplied for the workstations.
+<P>
+When a trigger message is put on the initiation queue, the trigger monitor reads the message, starts the application that is described in the trigger message, and passes some data to that application.<br>
+The data that is passed is defined by structure MQTMC2, which is mainly the trigger message itself with all the fields in characters.
+<P>
+How the structure is passed is platform and environment dependent.
+See the <I>APG</I> for details.
+<br><br><br>
+
+<FONT SIZE="+2">What is triggering?</FONT>
+<br>
+The trigger monitor starts the application defined in the trigger message and passes data to it in structure MQTMC2, or the appropriate structure in other environments.<br>
+The <I>started application</I> obtains the name of the queue manager to connect to, and the queue to open, from the MQTCM2 structure.<br>
+It then can retrieve the message or messages that caused the trigger event.
+<P>
+One advantage is that the started application obtains the name of the queue manager and the name of the input queue from the trigger monitor. There is no need to hard-code one of these names in the program, so allowing for maximum flexibility.
+<P>
+Another advantage is that system resources are saved because processing only happens if there is a need.
+<P>
+On the other hand, starting a process can also be time-consuming. The MQSeries system administrator must monitor the system and decide if triggering is to be used and, if so, to what extent.
+<br><br><br>
+
+
+<FONT SIZE="+2">What is triggering?</FONT>
+<br>
+Here you can see the whole sequence from the point when a message is put to an application queue until the point when the started application retrieves a message from that queue.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The trigger message 2 structure</FONT>
+<br>
+Data is passed to the application using either the MQTM, the MQTMC or the MQTMC2 structure.
+<br>
+The MQTMC2 structure is very similar to the format of the trigger message, that is the MQTM structure. The difference is that the non-character fields in MQTM are changed in MQTMC2 to character fields of the same length, and the queue manager name is added at the end of the structure.
+<P>
+The MQTMC structure is the same as MQTMC2, but with the Version field set to MQTMC_VERSION_1, and the <I>QMgrName</I> field omitted.
+<P>
+Click each field in turn for a description of the field and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">The trigger types</FONT>
+<br>
+Here you see the type of triggering that can be defined for a queue.<br>
+The trigger-type attribute can be one of the following:
+
+<UL>
+<LI>MQTT_FIRST
+<LI>MQTT_DEPTH
+<LI>MQTT_EVERY, or
+<LI>MQTT_NONE
+</UL>
+
+MQTT_NONE means no triggering at all and is the default value for a queue.
+Click each trigger type in turn to read about it.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Trigger messages and units of work</FONT>
+<br>
+Here you see what happens when a trigger event occurs within a unit of work.<br>
+Trigger messages are created because trigger events, which are part of a unit of work, are put on the initiation queue as part of the same unit of work.<br>
+Trigger monitors cannot retrieve these trigger messages until the unit of work completes.<br>
+This applies whether the unit of work is committed or backed out.
+<br><br><br>
+
+
+<FONT SIZE="+2">Trigger messages and units of work</FONT>
+<br>
+Trigger messages are committed irrespective of whether the message on the application queue is committed or backed out.<br>
+This means that the trigger monitor will start the application identified in the process assigned to the application queue even if the message that caused the trigger event is backed out.
+<P>
+The started application should therefore always expect that there is no message on the application queue.<br>
+It should also wait a while before closing the queue in case other messages arrive on the queue and are committed.<br>
+There are other situations where an application may be started only to find no messages on the application queue.<br>
+As a general rule, you should always allow for it.
+<br><br><br>
+
+
+<FONT SIZE="+2">Trigger messages and units of work</FONT>
+<br>
+Here you see the general structure of an application that is started by a trigger monitor.<br>
+This structure mainly applies to trigger types FIRST and EVERY.
+<P>
+Click each component in turn for more information.
+<br><br><br>
+
+
+
+</font>
+</body>
+</html>
