@@ -1,0 +1,534 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+
+<HTML>
+<HEAD><TITLE>Introduction to the MQ84 Course</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<SCRIPT LANGUAGE="JavaScript" SRC="introIE.js"></SCRIPT>
+<LINK REL=stylesheet TYPE="text/css" HREF="Architecture.css" TITLE="style">
+</HEAD>
+
+<BODY bgcolor="#9900cd" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLL="NO" onLoad="
+     if(is.ns4) {
+          available_width=innerWidth;
+          available_height=innerHeight;
+          preLoad();
+     } else if(is.ie4) {
+          available_width=document.body.clientWidth;
+          available_height=document.body.clientHeight;
+          preLoad();
+     }"
+
+onResize="history.go(0)">
+
+<DIV ID="titleLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 600px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="topLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 1; visibility: hidden;">
+   <IMG SRC="media/G3000d.jpg" border="0">
+</DIV>
+
+<DIV ID="pdfLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 500px; height: 40px; z-index: 3; visibility: hidden;">
+<font class=buttons>  <a href="labs/labSetupDoc.exe">
+   <img src="media/G3112c.jpg" border="0" alt="Lab Setup Doc"> pdf for Lab Setup Doc </a></font>
+</DIV>
+
+<DIV ID="contentLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 450px; height: 40px; z-index: 30; visibility: hidden;">
+  <font class=buttons><a href="javascript:void(null)" onclick="dummy=goInvisible();scr26Lyr.visibility='visible';"> Click here to see the contents of the course   </a></font>
+</DIV>
+
+<DIV ID="tomenuLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 40px; height: 40px; z-index: 3; visibility: hidden;">
+  <a href="firstmenuIE.htm">
+   <img src="media/G3130b.jpg" border="0" alt="Course menu">
+  </a>
+</DIV>
+
+<DIV ID="totopic1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 40px; height: 40px; z-index: 3; visibility: hidden;">
+  <a href="Topic1/index.html">
+   <img src="media/G3120b.jpg" border="0" alt="A review of MQSeries">
+  </a>
+</DIV>
+
+<DIV ID="totopic1txtLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 200px; height: 40px; z-index: 4; visibility: hidden;">
+<PRE><font class=buttons><a href="Topic1/index.html">A review of MQSeries         </a></font></PRE>
+</DIV>
+
+<DIV ID="InftextLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 50px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="InfOpt1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="InfOpt2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="InfOpt3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="InfOpt4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="InfOpt5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="How2textLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 169px; height: 50px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="How2Opt1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="How2Opt2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="How2Opt3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="How2Opt4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="How2Opt5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="How2Opt6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 128px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="Go2textLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 69px; height: 50px; z-index: 2; visibility: hidden;">
+</DIV>
+
+<DIV ID="bluepanelLayer" STYLE="position: absolute; left: 0px; top: 0px; z-index: 2; visibility: hidden;">
+ <IMG SRC="media/G3032c.jpg" border=0>
+</DIV>
+
+<DIV ID="bptext1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+
+<DIV ID="bptext2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+
+<DIV ID="bptext3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+
+<DIV ID="bptext4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+
+<DIV ID="bptext5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 4; visibility: 
+hidden;">
+ <IMG SRC="media/G3031b.jpg" border=0>
+</DIV>
+
+<DIV ID="bptext6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="bptext7Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="scr1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3036b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3033b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3034b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3035b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3032b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3037b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr7Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3038b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr8Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3039b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr9Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3040b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr10Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3041b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr11Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3042c.jpg" border=0>
+</DIV>
+
+<DIV ID="scr12Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3042b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr13Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3140b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr14Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3141b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr15Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3142b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr16Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3143b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr17Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3150b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr18Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3151b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr19Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3152b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr20Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3153b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr21Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3154b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr22Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3155b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr23Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3156b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr24Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3159b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr25Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3160b.jpg" border=0>
+</DIV>
+
+<DIV ID="scr26Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+     <img src="media/G3158b.jpg" border=0>
+</DIV>
+
+<DIV ID="soundLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+    <APPLET code="HotAudioLite.class" width=0 height=0>
+               <Param name="src" value="media/DLAU01.hal">
+               <Param name="autostart" value ="True">
+               <Param name="autoreplay" value ="false">
+               <Param name="bkcolor" value="FFCC66">
+               <Param name="showslider" value ="True">
+               <Param name="showplay" value="True">
+               <Param name="showstop" value ="True">
+       </applet>
+</DIV>
+
+<DIV ID="curtitleLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height:50px; z-index: 14; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curbox1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curbox2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curbox3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curbox4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curbox5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curbox6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+
+<DIV ID="curbox7Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ01uplLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ01uprLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ01dolLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ01dorLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ02uplLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ02uprLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ02dolLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ02dorLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ03uplLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ03uprLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ03dolLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ03dorLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ04uplLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ04uprLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ05uplLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ05uprLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ06uprLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="curMQ07uprLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 4; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon7Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon8Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon9Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon10Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon11Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon12Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon13Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon14Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon15Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon16Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon17Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon18Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon19Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon20Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon21Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon22Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon23Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="balloon24Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 400px; z-index: 5; visibility: 
+hidden;">
+</DIV>
+
+<DIV ID="op1Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op2Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op3Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op4Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op5Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op6Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op7Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op8Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op9Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op10Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+<DIV ID="op11Layer" STYLE="position: absolute; left: 0px; top: 0px; width: 325px; height: 50px; z-index: 1; visibility: 
+hidden;">
+<img src="media/G3120b.jpg" border=0>
+</DIV>
+
+</BODY>
+</HTML>

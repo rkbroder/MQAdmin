@@ -1,0 +1,342 @@
+<html>
+<head><title>Topic 9 - Replies and Reports - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 9: Replies and Reports</h1>
+
+<FONT SIZE="+2">Remote queues</FONT>
+<br>
+An application connected to one queue manager can send a message to a queue owned by another queue manager.<br>
+The application issues an MQPUT call to do this.<br>
+The queue manager to which it is connected puts the message on a special type of local queue known as a <I>transmission queue</I>.<br>
+An application supplied with MQSeries, called a <I>message channel agent</I> (MCA), then retrieves the message from the transmission queue and sends it over a communications connection to a partner MCA on another system.<br>
+This MCA puts the message on the <I>destination queue</I> owned by the other queue manager. The receiving application, which is connected to this queue manager, can then get the message by issuing an MQGET call.
+<br><br><br>
+
+
+<FONT SIZE="+2">Remote queues</FONT>
+<br>
+From the point of view of an application, the queue manager to which it is connected is known as its <I>local queue manager</I>. Any queue manager to which it is not connected is known as a <I>remote queue manager</I> and any queue owned by such a queue manager is known as a <I>remote queue</I>.
+<br><br><br>
+
+<FONT SIZE="+2">Remote queues</FONT>
+<br>
+An important point to remember is that once a message has been successfully put on a transmission queue, control returns to the application.
+The MQPUT call completes with a MQCC_OK completion code and a MQRC_NONE reason code.<br>
+The subsequent process of transferring the message from the transmission queue to its intended destination queue is totally transparent to the sending application.<br>
+It happens asynchronously with respect to its execution.
+<br><br><br>
+
+<FONT SIZE="+2">Sending a message to a remote queue</FONT>
+<br>
+In a network of queue managers, it is possible for two queues, each owned by a different queue manager, to have the same name. Therefore, in order to identify a queue uniquely within a network, both the name of the queue and the name of the queue manager that owns it are required.
+<P>
+Suppose an application connected to queue manager MARS needs to send a message to a queue named INPUT_Q owned by queue manager JUPITER. In preparation for doing this, the application first sets the ObjectName field in the object descriptor <FONT SIZE="+1" COLOR="#000000" FACE="Courier">OBJ_DESC</FONT> to <FONT SIZE="+1" COLOR="#000000" FACE="Courier">"INPUT_Q"</FONT> and the <FONT SIZE="+1" COLOR="#000000" FACE="Courier">ObjectQMgrName</FONT> field to <FONT SIZE="+1" COLOR="#000000" FACE="Courier">"JUPITER"</FONT>.
+It then issues an MQOPEN call.
+<br><br><br>
+
+
+<FONT SIZE="+2">Sending a message to a remote queue</FONT>
+<br>
+When queue manager MARS receives control, it determines that the application wishes to open a remote queue.<br>
+Furthermore, it determines which transmission queue to use for messages that are destined for queue manager JUPITER.<br>
+It does all this by referencing definitions that have been entered previously by an MQSeries system administrator and according to a set of rules.<br>
+Note that there may be more than one transmission queue at a queue manager.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Sending a message to a remote queue</FONT>
+<br>
+The object handle that is returned to the application program by the MQOPEN call therefore represents access that has been established to the appropriate transmission queue.<br>
+When the application issues an MQPUT call specifying this object handle as an input parameter, the message is put on the transmission queue and control returns to the application.
+<P>
+As the message is put on the transmission queue, the queue manager appends a special header, called a <I>transmission queue header</I>, to the application data in the message. The transmission queue header includes the name of the destination queue, INPUT_Q, and the name of the destination queue manager, JUPITER. These two pieces of data then effectively constitute the “address” of the message.
+<P>
+Subsequently and asynchronously, the message is transferred from the transmission queue at MARS to the queue INPUT_Q at JUPITER.
+<br><br><br>
+
+
+<FONT SIZE="+2">The local definition of a remote queue</FONT>
+<br>
+In general, it is not considered good programming practice to specify the actual name of a queue manager in application source code.<br>
+This can reduce the portability of the application and the flexibility of the MQSeries system administrator.<br>
+The recommended approach is as follows.
+<P>
+In Topic “The MQOPEN call”, the concepts of a local queue, an alias queue, and a model queue were introduced.<br>
+There is a fourth type of queue called a <I>local definition or a remote queue</I> or, more simply, a <I>remote queue definition</I>.<br>
+Like the other types of queue, a local definition of a remote queue has a definition that is maintained by the queue manager and, like an alias queue and a model queue, it cannot store messages.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The local definition of a remote queue</FONT>
+<br>
+The purpose of a local definition of a remote queue is to enable an application to reference a remote queue by specifying a single name.
+To use a local definition of a remote queue, an application specifies its name in the <I>ObjectName</I> field in the object descriptor on an MQOPEN call.
+The <I>ObjectQMgrName</I> field in the message descriptor is set to blanks.
+
+In the example, the application sets the <FONT SIZE="+1" COLOR="#000000" FACE="Courier">ObjectName</FONT> field in the object descriptor to <FONT SIZE="+1" COLOR="#000000" FACE="Courier">"REMOTE_INPUT_Q"</FONT>, which is the name of a local definition of a remote queue.
+It then issues an MQOPEN call.
+<br><br><br>
+
+
+<FONT SIZE="+2">The local definition of a remote queue</FONT>
+<br>
+The definition of REMOTE_INPUT_Q, as maintained by queue manager MARS, specifies the following:
+
+<UL>
+<LI>The name of the remote queue as it is known by the remote queue manager - that is, INPUT_Q.
+<LI>The name of the remote queue manager - that is, JUPITER.
+<LI>Optionally, the name of the transmission queue to use.
+There are several ways to specify a transmission queue. They are not covered here.
+</UL>
+
+When the queue manager receives control, it can look up the definition of REMOTE_INPUT_Q and determine which transmission queue to use.
+<br><br><br>
+
+
+<FONT SIZE="+2">The local definition of a remote queue</FONT>
+<br>
+When the application issues an MQPUT call specifying the object handle returned on the MQOPEN call, the message is put on the transmission queue that has been identified.<br>
+The transmission queue header that is appended to the application data in the message contains the name of the remote queue, INPUT_Q, and the name of the remote queue manager, JUPITER.<br>
+The queue manager obtains this information from the local definition of the remote queue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Multi-hopping</FONT>
+<br>
+In a network of queue managers, it is possible for an application to send a message to a queue that is owned by a queue manager not necessarily adjacent to the one to which it is connected. In which case, the message has to be routed through one or more intermediate queue managers before it can be put on its intended destination queue.<br>
+This is known as <I>multi-hopping</I>.
+<P>
+Whether multi-hopping is required to deliver a message is totally transparent to the sending application. How messages are routed through a network of queue managers is for the MQSeries system administrator to determine.
+<P>
+However, if an application is sending request messages that expect replies, it may be useful to know whether multi-hopping is taking place when estimating how long the application might expect to wait for the replies.
+<br><br><br>
+
+
+<FONT SIZE="+2">Message types</FONT>
+<br>
+
+There are four types of a message defined by MQSeries:
+<UL>
+<LI>Datagram
+<LI>Request
+<LI>Reply
+<LI>Report
+</UL>
+An application should use a <I>datagram</I> when it does not require a reply from the application that receives the message.<br>
+This is shown here.
+<br><br><br>
+
+<FONT SIZE="+2">Message types</FONT>
+<br>
+An application should use a <I>request message</I> when it wants a reply from the application that receives the message.
+<P>
+An application should use a <I>reply message</I> when replying to a request message that it has received.
+<br><br><br>
+
+
+<FONT SIZE="+2">Message types</FONT>
+<br>
+A <I>report message</I> is used to inform an application that some expected or unexpected event has occurred which is related to a message that the application sent earlier.
+<P>
+A report message may be generated by a queue manager, an MCA, or an application. Here you see a report message that is generated by an MCA because it is unable to put the message on its intended destination queue. There are a number of reasons why it might not be able to do this. For example, the queue may be full or the message may be too big to be put on the queue.
+<P>
+Although the four message types are explained here in the context of a remote queuing environment, all four types are still applicable when both the sending and the receiving application are connected to the same queue manager and only local queues are being used. However, in the latter case, no report message is ever generated by an MCA because there is no MCA involved. In addition, when a sending application attempts to put a message on a local queue and a problem arises at that time, the queue manager does not generate a report message. It simply informs the application synchronously that a problem has occurred by means of the completion code and reason code that are returned on the MQPUT call. Thus, a report message is really used to report an event that occurs asynchronously with respect to application execution.
+<br><br><br>
+
+
+<FONT SIZE="+2">Sending a requst message</FONT>
+<br>
+Here you can see an application that sets the <FONT SIZE="+1" COLOR="#000000" FACE="Courier">MsgType</FONT> field in the message descriptor to MQMT_REQUEST and the <FONT SIZE="+1" COLOR="#000000" FACE="Courier">ReplyToQ </FONT>field to <FONT SIZE="+1" COLOR="#000000" FACE="Courier">"REPLY_Q"</FONT>.<br>
+The <FONT SIZE="+1" COLOR="#000000" FACE="Courier">ReplyToQMgr</FONT> field is not explicitly set and so its initial value is used.<br>
+The initial value is blanks which denotes the local queue manager.<br>
+Therefore, when the MQPUT call is issued, the queue manager places its own name in the message descriptor that accompanies the request message.
+<P>
+As a result, the application that receives the request message can determine not only the name of the reply-to queue but also the name of the queue manager that owns the queue.<br>
+This is particularly important when the sending and receiving applications are each connected to a different queue manager.<br>
+You may recall that, within a network of queue managers, both the name of the queue and the name of the queue manager that owns it are required in order to identify a queue uniquely.
+<br><br><br>
+
+<FONT SIZE="+2">Reply-to queue at a remote manager</FONT>
+<br>
+When an application sends a request message, it can specify a reply-to queue that is owned by a remote queue manager rather than the local queue manager. For example, there could be an application design in which a separate component of the application is responsible for processing the reply messages. This component could be executing asynchronously and could be connected to a different queue manager.
+<P>
+Here you can see an example of how an application can specify a reply-to queue that is owned by a remote queue manager. The application which is connected to the queue manager MARS  sets the <FONT SIZE="+1" COLOR="#000000" FACE="Courier">ReplyToQ</FONT> field in the message descriptor to <FONT SIZE="+1" COLOR="#000000" FACE="Courier">"REPLY_Q"</FONT> and the <FONT SIZE="+1" COLOR="#000000" FACE="Courier">ReplyToQMgr</FONT> field to <FONT SIZE="+1" COLOR="#000000" FACE="Courier">"VENUS"</FONT>.<br>
+By inspecting these fields in the message descriptor the receiving application knows that it should send any reply messages to the queue named REPLY_Q that is owned by the queue manager named VENUS.
+<br><br><br>
+
+
+<FONT SIZE="+2">The reply-to queue alias</FONT>
+<br>
+In general, it is not considered good programming practice to specify the actual name of a queue manager in application source code. This also applies to the name of a queue manager that owns a reply-to queue. The recommended approach is to use a <I>reply-to queue alias</I>.
+<P>
+A reply-to alias is yet another type of queue that has a definition maintained by the queue manager but cannot store messages.<br>
+A reply-to queue alias enables an application to reference a reply-to queue by specifying a single name even when the reply-to queue is remote.<br>
+To use a reply-to queue alias, an application specifies its name in the <I>ReplyToQ</I> field in the message descriptor on an MQPUT call. The <I>ReplyToQMgr</I> field in the message descriptor is set to blanks.
+<P>
+Here you can see an application that sets the <FONT SIZE="+1" COLOR="#000000" FACE="Courier">ReplyToQ</FONT> field in the message descriptor to <FONT SIZE="+1" COLOR="#000000" FACE="Courier">"REMOTE_REPLY_Q"</FONT>, which is the name of a reply-to alias. It then issues an MQPUT call.
+<br><br><br>
+
+
+<FONT SIZE="+2">The reply-to queue alias</FONT>
+<br>
+When the queue manager receives control, it looks up the definition of REMOTE_REPLY_Q and places these names in the message descriptor that accompanies the request message.<br>
+The receiving application knows that it should send any reply messages to the queue named REPLY_Q that is owned by the queue manager named VENUS
+<br><br><br>
+
+
+<FONT SIZE="+2">Sending a reply message</FONT>
+<br>
+So far, you have had a look at the application that sends a request message and how it specifies where any reply messages should be sent.<br>
+Now you will have a look at the application that receives a request message and how it sends a reply.
+<P>
+The application issues an MQGET call in order to retrieve a request message from the destination queue.<br>
+Normally, it would then perform some validation on the request message.<br>
+In particular, it might check that the message is really a request message by inspecting the value of the <I>MsgType</I> field in its message descriptor.
+<P>
+Once the message has been validated, the application processes the request message and formulates a reply message. It then issues an MQPUT1 call in order to send the reply message.
+<br><br><br>
+
+
+<FONT SIZE="+2">Sending a reply message</FONT>
+<br>
+Here you can see the situation where the client applications and the server application are not connected to the same queue manager. As a result, MCAs are required in order to transfer messages into the queue manager to which the server application is connected.
+<br><br><br>
+
+
+<FONT SIZE="+2">Coding the sending a reply message</FONT>
+<br>
+Here is an example of how to code the sending of a reply message. In summary, the code retrieves request messages from a queue and sends a reply message for each one. Potentially, each request message may specify a different reply-to queue and so an MQPUT1 call is used to send a reply message.
+<P>
+Click each block of pseudo-code in turn to read a commentary on what the code does.
+<br><br><br>
+
+
+<FONT SIZE="+2">Report messages</FONT>
+<br>
+A report message is used to inform an application that some expected or unexpected event has occurred which is related to a message that the application sent earlier.<br>
+A report may be generated by a queue manager, an MCA, or an application.
+Like a reply message, it is sent to the queue identified by <I>ReplyToQ</I> and <I>ReplyToQMgr</I> fields in the message descriptor of the original message.
+<P>
+Here are the six types of report defined by MQSeries:
+<UL>
+<LI>Exception
+<LI>Expiration
+<LI>Confirm on arrival (COA)
+<LI>Confirm on delivery (COD)
+<LI>Positive action notification (PAN)
+<LI>Negative action notification (NAN)
+</UL>
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Requesting a report message</FONT>
+<br>
+When an application sends a message, it should request any reports that it wishes to receive.<br>
+A queue manager or an MCA does not generate report messages by default. Applications that generate them normally adopt the same convention.<br>
+However, there is nothing to prevent an application from ignoring a request for a report, neither is there anything to prevent an application from generating a report that has not been requested.
+<P>
+Reports can be requested by specifying one or more report options in the <I>Report</I> field of the message descriptor. Here you see the report options corresponding to each of the six types of report.<br>
+If more than one option is required, the values can be:
+
+<UL>
+<LI>Added together, or
+<LI>Combined using the bitwise OR operation, provided the programming language supports this operation.
+</UL>
+
+An application may request no reports.<br>
+This is done by setting the <I>Report</I> field to MQRO_NONE which is also the initial value of the field.
+<P>
+The data type of the <I>Report</I> field is MQLONG.
+<P>
+Report options are not supported on MQSeries for VSE/ESA. For this queue manager, the value of the field of the <I>Report</I> field must be MQRO_NONE.
+<P>
+For a complete description of each report option, see the <I>MQSeries Application Programming Reference</I>.
+Click each report option in turn to read a summarized description of its function.
+<br><br><br>
+
+<FONT SIZE="+2">The nature of a report</FONT>
+<br>
+When a report message is generated, the <I>Feedback</I> field in the message descriptor is used to indicate the nature of the report. When an application receives a report, it should query the <I>Feedback</I> field in order to determine what has happened to the message.<br>
+The contents of the <I>Feedback</I> field are only meaningful in a report message.
+<P>
+The <I>Feedback</I> field may contain one <I>feedback code</I> or one reason code. Here you can see some of the feedback and reason codes that may appear in the <I>Feedback</I> field.<br>
+For a complete list, see the <I>MQSeries Application Programming Reference</I>.
+The data type of the <I>Feedback</I> field is MQLONG and its initial value is MQFB_NONE which indicates that no feedback is provided.
+<P>
+Click each feedback or reason code in turn for a description of its meaning.
+<br><br><br>
+
+<FONT SIZE="+2">Message and correlation identifiers</FONT>
+<br>
+The <I>Report</I> field can also be used to specify how the message and correlation identifiers of a report message are to be set.<br>
+Four more report options are available for this purpose.
+<P>
+Additionally, the same options can be used to specify how the message and correlation identifiers of a reply message should be set.
+<P>
+Click each report option in turn to discover its meaning.
+<br><br><br>
+
+<FONT SIZE="+2">Message and correlation identifiers</FONT>
+<br>
+When a queue manager or an MCA generates a report, it sets the fields in the message descriptor according to a set of rules.
+<P>
+If an application generates a report, it is recommended that it adopts the same conventions and sets similar values. The application may set the <I>ReplyToQMgr</I> field to blanks, however, but the local queue manager will change this to its own name in the message descriptor that accompanies the report message.
+<P>
+Here are the fields in the message descriptor you have met so far.
+Click each field in turn to discover how a <I>queue manager or an MCA</I> sets the field for a report message.
+<br><br><br>
+
+
+<FONT SIZE="+2">The dead letter queue</FONT>
+<br>
+If an MCA cannot put an incoming message on its intended destination queue, the MCA puts the message on the <I>dead letter queue</I> instead.
+<P>
+A dead letter queue is a local queue that has been identified to the queue manager in this special role by the system administrator.  
+A queue manager may have only one dead letter queue.
+<P>
+Messages that cannot be delivered are stored on a dead letter queue, but they cannot be left there indefinitely. Each message needs to be investigated to determine why it was put on the queue. Ultimately, it must be forwarded to a queue where it can complete its processing. This may be its intended destination queue, if the problem that prevented it being put on there has now been resolved.
+<P>
+There are dead letter queue handlers that can help automate the processing of messages on a dead letter queue. <br>
+However, there may be occasions when manual intervention is necessary.
+<br><br><br>
+
+
+<FONT SIZE="+2">The dead letter queue</FONT>
+<br>
+When an MCA puts a message on the dead letter queue, it also sends an exception report to the specified reply-to queue if an exception report has been requested.
+<P>
+In a multi-hop situation, an MCA may not be able to put an incoming message on a transmission queue at an intermediate queue manager. In which case, the MCA puts the message on the dead letter queue at that queue manager.
+<P>
+It is not mandatory for a queue manager to have a dead letter queue.<br>
+However, if the receiving queue manager has no dead letter queue and there is a reason to put a message to a dead letter queue, the message is held on the transmission queue being served by its partner MCA at the sending end and no more messages can flow between the two MCAs. Some form of intervention, automated or manual, is then required in order to determine why the message could not be put on the queue and to fix the problem.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The dead letter header</FONT>
+<br>
+When a message is put on a dead letter queue, a <I>dead letter header</I> is prefixed to the application data. The dead letter header is a structure with data type MQDLH. The fields in the structure contain information about the message related to its being on the dead letter queue.<br>
+Click dead letter header to see some of the fields in the MQDLH structure.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The dead letter header</FONT>
+<br>
+Here you can see some of the fields in the MQDLH structure. They are listed in the order in which they appear within the structure. See the <I>MQSeries Application Programming Reference</I> for a complete list of fields in the MQDLH structure and a full description of each one.
+<P>
+Click each field in turn for a description of the field and to discover its data type.
+<br><br><br>
+
+
+
+
+</font>
+</body>
+</html>

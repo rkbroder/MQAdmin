@@ -1,0 +1,196 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head><title>Topic 3 - A review of the MQI - Audio transcript </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ84 - Topic 3: A review of the MQI</h1>
+
+<FONT SIZE="+2"> The MQI calls</FONT>
+<br>
+The MQI is the simple call interface developed to allow application access to the functions provided by the queue manager.
+<P>
+Each call comprises a set of positional parameters. They may be either  a single data item or a structure of multiple data items.
+<P>
+Where possible, the MQI provides default and initial values to help reduce the programming effort required to implement an MQSeries enabled application.
+<P>
+Now click each of the displayed calls for a description of its function.  Some of the explanations have further information. To see this, click  the Next button within the explanations.
+<br><br><br>
+
+<FONT SIZE="+2">The MQCONN call</FONT>
+<br>
+The MQCONN call is used to establish a connection to a queue manager. Once established the application may, subject to security, call upon the services provided by that queue manager. The parameters must maintain the order displayed and they can not be omitted.
+<P>
+Rollover each parameter for a short description of its function.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQDISC call </FONT>
+<br>
+The MQDISC call breaks the connection the application has with the queue manager. It invalidates the connection handle that was created by the MQCONN or MQCONNX call. 
+<P>
+This call will also mark the unit of work, if still open, as complete.
+<P>
+The call will return completion and reason codes to indicate the state of the call.
+<P>
+Rollover each parameter for a short description of its function.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQOPEN call</FONT>
+<br>
+The MQOPEN call allows the application to identify to the connected queue manager the object it wishes to manipulate. The call also specifies the type of process to be performed, such as get or put messages, and the options required during that process. The queue manager security is object based, so this call is also a security check to ensure that the application has access to the object and all options requested.
+<P>
+Rollover each parameter for a description of its function.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQCLOSE call</FONT>
+<br>
+The MQCLOSE call is used to inform the queue manager that the application wishes to relinquish control of the open object identified by the object handle. As control can be exclusive, this call then allows for other applications to access the object. On return, the object handle is no longer a valid pointer to the object.
+<P>
+Click each  parameter for a description of its function.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQINQ call</FONT>
+<br>
+The MQINQ call is used to return the state or properties of an identified object to the connected queue manager. The object must have been opened for the inquiry operation by the appropriate MQOPEN option. As this call does not return message data, it is not necessarily part of every MQSeries enabled application and is intended as an administrative call.
+<P>
+Click the parameters for a brief description.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQSET call</FONT>
+<br>
+The MQSET call is of the same structure as the MQINQ call and is used by an application to alter the current state of attributes of an open queue.
+<P>
+The selected attributes are named in an array and their new values are named in either the character or integer array.
+<P>
+Only attributes that are associated with the triggering mechanism, get and put operations and advanced messaging may be altered in this way.
+<P>
+They are updated without reference to their previous value. As this call does not return message data, it is not necessarily part of every MQSeries enabled application and is intended as an administrative call.
+<P>
+Rollover each parameter for a brief description.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQPUT call</FONT>
+<br>
+The MQPUT call is used to place a message on a queue that has been opened with the appropriate output option.
+<P>
+Rollover each parameter for a brief description.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQGET call</FONT>
+<br>
+The MQGET call is used to retrieve and mark for deletion a selected message from a previously opened for input queue.
+<P>
+The parameters to this call include the area for the application data, a parameter describing the options to control the MQGET call, and an area for the message descriptor of the message.
+<P>
+Rollover each parameter for a brief description.
+<br><br><br>
+
+
+<FONT SIZE="+2">Additional MQI function</FONT>
+<br>
+Many of the concepts of messaging, as implemented by the MQI, are implemented over a number of calls.
+<P>
+Click the options in the menu to see a brief description of the function, and then click the 
+Next button in the explanation box if you want further information.
+<br><br><br>
+
+
+<FONT SIZE="+2">Message persistence</FONT>
+<br>
+A message may need to be retained by the queue manager until delivered, even over a restart or recovery operation. This feature of MQSeries is controlled at the message level by the use of the message persistence indicator located in the message descriptor.
+<P>
+The queue manager will always place a copy of a persistent message into the recovery log at the time the message is being put to the application queue.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Message priority</FONT>
+<br>
+Each message in a queue has a priority in the range of 0 through 9 with 9 being highest.The priority is assigned either implicitly or explicitly by the application that created the message.
+<P>
+Messages are delivered to an application in either strict first in first out order, or in first in first out order within priority sequence. The delivery order is assigned in the queue definition and not by the application.
+<br><br><br>
+
+
+<FONT SIZE="+2">Message and correlation identifiers</FONT>
+<br>
+The message and correlation identifiers are fields in the message descriptor.
+<P>
+Either or both  can be used as identifiers when selecting a message from a queue. When an application is building a reply message, the correlation identifier will normally be set to the message identifier of the original request message.  In this way, the application that receives the reply can match it with the original message if  the message identifier of the original message has been saved in some way.
+<br><br><br>
+
+
+<FONT SIZE="+2">Replies and reports</FONT>
+<br>
+An application may put a message to a queue that specifies that reports are to be generated if and when certain conditions occur. If a message cannot be delivered to a remote destination queue, the original message will be placed in the dead letter queue and a report message put to the reply to queue.
+<P>
+The application will get from the reply to queue and process each message according to the type of message.
+<P>
+Click  the report in the diagram to see the types of report message that are available.
+<br><br><br>
+
+
+<FONT SIZE="+2">Types of reports</FONT>
+<br>
+If the type of message received is a report, then another field in the message descriptor will indicate the reason for the report. Here are the six main reasons for reports to be generated.
+<P>
+Rollover each type of report for a brief description.
+<br><br><br>
+
+
+<FONT SIZE="+2">Expiry</FONT>
+<br>
+A message is deemed to be unavailable when it has been on a queue for longer than the expiry interval value. When an application attempts to get an expired message, the message will be deleted and the next available message will be returned. If the expired message indicates that an expiry report is required,  the queue manager will put an expiry report message to the reply to queue named in the original message.
+<br><br><br>
+
+
+<FONT SIZE="+2">Message groups</FONT>
+<br>
+The group identifier in the message descriptor is the name of the group this message belongs to. All messages in a group would have the same identifier, but  a different sequence number either assigned by the putting application or the queue manager. A message with no assigned value for the group identifier is not a member of a group and the sequence number is not used.
+<br><br><br>
+
+
+<FONT SIZE="+2">What are message groups used for?</FONT>
+<br>
+Message grouping is useful where the receiving application must get multiple messages in strict sequence, regardless of the message arrival order and potentially only when all the messages are available.
+<br><br><br>
+
+
+<FONT SIZE="+2">Message segmentation</FONT>
+<br>
+Application data to be put on a queue may be viewed as a logical message. A logical message may be divided into more than one physical message. Each message would have a message descriptor, and identify its position in the logical message by the use of the segment offset value located in the message descriptor.
+<br><br><br>
+
+
+<FONT SIZE="+2">When is message segmentation used?</FONT>
+<br>
+An application may put each segment of a logical message to the queue, or indicate to the queue manager to segment the message if required. This allows all the application’s queues and queue managers  to support different size messages according to the physical requirements of the environment.
+<P>
+An application can receive the message segment by  segment or indicate to the queue manager to reconstruct the logical message if it has been segmented.
+<br><br><br>
+
+
+<FONT SIZE="+2">Distribution lists</FONT>
+<br>
+A distribution list allows an application to send the same message to multiple destinations with a single put call.
+<P>
+An application builds a list of queues in the form of a distribution list and appends it to the object descriptor named to the open call.
+<P>
+After the open is completed, the put call delivers the message to all the opened queues. Only one image of the message will be distributed to a remote queue manager that supports distribution lists. The message will then be redistributed to the relevant queues.
+<br><br><br>
+
+
+
+</font>
+</body>
+</html>

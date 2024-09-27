@@ -1,0 +1,127 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head><title>Topic 12 - Queue manager clusters - Audio transcript </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ84 - Topic 12: Queue manager clusters</h1>
+
+<FONT SIZE="+2"> What is a cluster</FONT>
+<br>
+The queue managers QM1, QM2, QM3 and QM4 can be logically associated to a named cluster. The use of the cluster reduces the number of channel definitions between the queue managers and improves the queues’ availability within the queue managers.
+<br><br><br>
+
+<FONT SIZE="+2">Cluster support objects</FONT>
+<br>
+Queue manager QM1 creates a full repository by collecting information about all the other queue managers in the cluster via the cluster receiver channel.
+<P>
+Queue managers QM2, QM3 and QM4 create partial repositories by receiving information on an ‘as-required’ basis, via the cluster sender channel.
+<P>
+A cluster transmission queue is defined within each queue manager to exchange messages within the cluster.
+<P>
+Click each of the objects for a brief description of what the term means.
+<br><br><br>
+
+
+<FONT SIZE="+2">Repositories</FONT>
+<br>
+Queue manager QM1 receives information sent by the other queue managers in the cluster and updates the repository. All changes are then sent to queue manager QM4, as it holds a copy of the repository for backup or availability reasons.
+<P>
+Queue managers QM2 and QM3 derive information from the full repositories and build up their own subsets in <i>partial repositories</i>.
+<P>
+A cluster-sender channel is used to notify the repositories of any changes to the queue managers within the cluster.
+<br><br><br>
+
+
+<FONT SIZE="+2">Setting up a cluster</FONT>
+<br>
+Relating a queue manager to a cluster is achieved by entering these commands. In this case, the cluster is named EDUC and this queue manager is to hold a full repository.
+Click each command to see what the definition does.
+<br><br><br>
+
+
+<FONT SIZE="+2">Workload balancing </FONT>
+<br>
+TARGET.Q is defined as a local queue on queue managers QM2, QM3 and QM4 and advertised within the EDUC cluster. Queue manager QM1 is defined as the holder of the repository information for the EDUC cluster. The queue manager selection code of the repository queue manager will select which queue manager to route the open and put requests to.
+<br><br><br>
+
+
+<FONT SIZE="+2">Workload balancing </FONT>
+<br>
+When an application program at QM1 opens the TARGET.Q, it does not necessarily know which particular instance of TARGET.Q will process its messages. However, when an application at QM2 or an application at QM4 opens the TARGET.Q  it will use the local instance of the queue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Workload balancing </FONT>
+<br>
+Messages destined to TARGET.Q can be handled by any one of the queue managers QM2, QM3 or QM4.
+<P>
+This means that the application on QM1 need not explicitly name the queue manager when sending messages.
+<P>
+A user exit, defined with ALTER QMGR command and activated at MQOPEN and at MQPUT call time, determines which queue manager to direct the request to.  If the selected queue manager becomes unavailable, a reselection process is undertaken and another queue manager is selected.
+<br><br><br>
+
+
+<FONT SIZE="+2">Workload balancing - rerouting</FONT>
+<br>
+An application can specify, on an open request, that the queue manager cluster workload exit be called whenever a message is put to the queue.
+<P>
+This enables the potential distribution of each message to queue managers within the cluster that have advertised a definition of this queue.
+<P>
+The selection of the queue manager will be made on each put call and if the selected queue manager fails to accept the message a further selection will be made until all eligible queue managers have been tried.
+<br><br><br>
+
+
+<FONT SIZE="+2">Cluster related attributes and commands</FONT>
+<br>
+With the introduction of clustering came new MQSeries commands, additional parameters and new attributes of MQSeries objects.
+<P>
+Click each area for further information, then click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Cluster related queue manager attributes</FONT>
+<br>
+These are the additional attributes of the queue manager object.
+<P>
+Here is a list of the cluster related queue manager attributes.
+<P>
+Click  each attribute to read a description, then click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Controlling clusters - cluster commands</FONT>
+<br>
+<P>These commands are used to  manage a queue manager’s relationship within a cluster. 
+Each command would be sent to the queue manager by the standard command interface.
+<P>
+Click each command for an explanation, then click Next to continue.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Controlling clusters - DISPLAY CLUSMGR</FONT>
+<br>
+The MQSeries display command is used to display the values of selected objects and attributes. If this command is issued against a  full repository queue manager, the information returned pertains to every queue manager in the cluster. If this command is issued against a partial repository, the information returned pertains only to the queue managers in which you have an interest.
+<br><br><br>
+
+
+<FONT SIZE="+2">Cluster related queue considerations</FONT>
+<br>
+The cluster parameter of the queue definition names which cluster this queue is to be advertised to.
+<P>
+If the queue is to be advertised to multiple clusters, then the cluster name list parameter must be used.
+<P>
+If the value of both of these parameters is blank then the queue is private to the queue manager that hosts the definition.
+<P>
+Once a queue has been advertised, any queue manager in the named cluster can put messages to it. Click each command for a description of  the command.
+<br><br><br>
+
+
+
+</font>
+</body>
+</html>

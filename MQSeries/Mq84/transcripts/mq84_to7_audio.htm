@@ -1,0 +1,169 @@
+<html>
+<head><title>Topic 7 - The MQPUT call - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 7: The MQPUT call</h1>
+
+<FONT SIZE="+2">What happens on an MQPUT call?</FONT>
+<br>
+There are six input parameters on an MQPUT call:<br>
+
+<UL>
+<LI>A connection handle. The handle was returned by a previous MQCONN call.
+<LI>An object handle. The handle was returned by a previous MQOPEN call. It identifies the queue on which the message is to be put.
+<LI>A message descriptor. This contains control information about the message being sent. There will be more about this later in the topic.
+<LI>A put message options structure. This specifies options that control the action of an MQPUT call. There will be more about this later in the topic.
+<LI>The length of the application data in the buffer.
+<LI>A buffer containing the application data in the message being sent. The buffer must be at least the length of the application data, but can be larger. This enables the application to send messages of varying sizes using one general purpose buffer.
+</UL>
+Roll the mouse over each parameter in turn for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">What happens on an MQPUT call?</FONT>
+<br>
+When the queue manager receives control, it performs a number of tasks, including the following:
+
+<UL>
+<LI>It checks that the object handle is valid and represents a queue that has been opened from output
+<LI>It checks that each of the put message options and their combination is valid
+<LI>It checks that the queue is not full
+<LI>It checks that the message is not too large to be put on the queue
+</UL>
+Provided everything is in order, the queue manager creates a message from the message descriptor and the application data supplied by the application and puts the message on the queue.
+<br><br><br>
+
+<FONT SIZE="+2">What happens on an MQPUT call?</FONT>
+<br>
+There are four output parameters on an MQPUT call:<br>
+The message descriptor, the put message options, a completion code, and a reason code.
+
+<UL>
+<LI>The message descriptor contains control information about the message that has been put on the queue. It is an input and an output parameter.
+Some of the fields are set by the application before issuing an MQPUT call and others are set by the queue manager during the call. Also, some fields have values that are set by the application but are then changed by the queue manager. As a result, the application can get to know the values of the fields that were set or changed by the queue manager during the call.
+<LI>The put message options structure contains options that control the action of the MQPUT call. It is an input and output parameter.
+<LI>A completion code.
+<LI>A reason code.
+</UL>
+Roll the mouse over each parameter in turn for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+<FONT SIZE="+2">The message descriptor</FONT>
+<br>
+On an MQPUT call, the message descriptor enables the application to specify certain control information about the message being sent.<br>
+The message descriptor is a structure with data type MQMD.
+<P>
+Here you see some of the fields in the MQMD structure. They are listed in the order in which they appear within the structure but the presence of intervening fields within the sequence is not indicated. See the <I>MQSeries Application Programming Reference</I> for a complete list of fields in the MQMD structure and a full description of each one.
+<P>
+Click each field in turn for an explanation of the field and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">Message priority</FONT>
+<br>
+When a message is put on a queue, the application may set the <I>Priority</I> field in the message descriptor to a value in the range 0 to 9, 9 being the highest priority.<br>
+This value determines the priority of the message, which in turn could determine when the message is retrieved from the queue by an MQGET call.
+<P>
+The data type is MQLONG
+<P>
+The way message priority is used depends upon the value of the <I>MsgDeliverySequence</I> attribute of the queue. Here are the permissible values of this attribute, and the effect of each one.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Message persistence</FONT>
+<br>
+A message may be either <I>persistent</I> or <I>non-persistent</I>.
+This is determined by the value of the <I>Persistence</I> field in its message descriptor. This value may be either MQPER_PERSISTENT or MQPER_NOT_PERSISTENT.<br>
+The field may be set explicitly by the application when it puts the message on a queue.
+<P>
+Persistent message are never lost as a result of a system failure.
+In order to achieve this, persistent messages are written out to a log.<br>
+When a queue manager is restarted following a system failure, it recovers persistent messages as necessary from the logged data.<br>
+Persistent messages also survive a planned shut down of a queue manager.
+<br><br><br>
+
+
+<FONT SIZE="+2">Message persistence</FONT>
+<br>
+Non-persistent messages do not survive a queue manager restart. This applies whether the preceding shutdown was planned or due to a system failure. When a queue manager is restarted, any non-persistent messages that are found are deliberately discarded.
+<P>
+It is clearly an application design issue as to whether a message should be persistent or non-persistent. Non-persistent messages can be used for better performance when it is not critical for them to be able to survive a queue manager restart.
+<P>
+Both persistent and non-persistent messages can be stored on the same queue. The only exception to this rule is a temporary dynamic queue which can store only non-persistent messages.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The message descriptor</FONT>
+<br>
+In Topic “Introduction to the MQI”, you learned that MQSeries provides a way of initializing the fields in a structure.
+<P>
+Click each field in turn to determine the initial value of the field. For a full list of initial values of the fields in a message descriptor, see the <I>MQSeries Application Programming Reference</I>.
+<br><br><br>
+
+
+<FONT SIZE="+2">The put message options</FONT>
+<br>
+The put message options structure enables the application to specify options that control the action of the MQPUT call. The structure has data type MQPMO.
+<P>
+Some of the fields in the MQPMO structure are shown here.<br>
+They are listed in the order in which they appear within the structure.<br>
+See the <I>MQSeries Application Programming Reference</I> for a complete list of fields in the MQPMO structure and a full description of each one.
+<P>
+Click each field in turn for an explanation of the field and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">The put message options</FONT>
+<br>
+In Topic  “Introduction to the MQI”, you learned that MQSeries provides a way of initializing the fields in a structure.
+<br>
+Click each field in turn to determine the initial value of the field. For a full list of initial values of the fields in a put message options structure, see the <I>MQSeries Application Programming Reference</I>.
+<br><br><br>
+
+
+<FONT SIZE="+2">Reason codes</FONT>
+<br>
+There are many reason codes that may be returned by the MQPUT call.<br>
+Here are just a few of those that could be returned when an MQPUT call fails.<br>
+You will find the complete list, along with full descriptions, in the <I>MQSeries Application Programming Reference</I>.
+<P>
+Click each reason code in turn to see its meaning.
+<br><br><br>
+
+<FONT SIZE="+2">Coding the MQPUT call</FONT>
+<br>
+Here is an example of how to code the MQPUT call. Refer to the <I>MQSeries Application Programming Reference</I> if you wish to see examples of any of the following in the programming language that you use:
+
+<UL>
+<LI>How a message descriptor is declared
+<LI>How a put message options structure is declared
+<LI>How the parameters of an MQPUT call are declared
+<LI>The format of an MQPUT call
+</UL>
+
+Click each block of pseudo-code in turn to read a commentary on what the code does.
+<br><br><br>
+
+
+<FONT SIZE="+2">The MQPUT1 call</FONT>
+<br>
+There is another MQI call whose purpose is to put a message on a queue.<br>
+This is the MQPUT1 call.
+<P>
+The difference between MQPUT call and MQPUT1 is that an MQPUT1 call opens a queue, puts a message on it, and then closes it, all within a single call.
+<P>
+An MQPUT1 call should be used when an application only needs to put one message on a queue. If an application needs to put several messages on a queue, it makes sense from a performance point of view to open the queue once by issuing an MQOPEN call, put the messages on it, and then close the queue by issuing an MQCLOSE call.
+<P>
+Note, as well, that authority checking takes place every time an MQPUT1 call is issued.
+<P>
+The parameters of an MQPUT1 call are the same as those of an MQPUT call except that the second parameter is an object descriptor instead of an object handle.<br>
+An object handle is not required since a queue is opened and closed within a single call.
+<br><br><br>
+
+</font>
+</body>
+</html>

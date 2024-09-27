@@ -1,0 +1,210 @@
+<html>
+<head><title>Topic 2 - Introduction to the MQI - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 2: Introduction to the MQI</h1>
+
+<FONT SIZE="+2">The MQI calls</FONT>
+<br>
+The MQSeries application programming interface is known as the Message Queue Interface, or MQI. 
+<P>
+The MQI is a set of calls that programmers use to ask for the services of a queue manager. For example, an application may wish to put a message on a queue.
+All the calls that make up the MQI are shown here - there are 14 in total.
+Each call comprises a set of parameters.There are input parameters which give information and instructions for the queue manager.There are output parameters which provide feedback information to the application program, and there are parameters that are used for input and output.
+<P>
+A parameter may be a single item of data or a structure with multiple fields.
+<P>
+Click each call for a brief description.
+<br><br><br>
+
+
+<FONT SIZE="+2">Elementary data types</FONT>
+<br>
+Each field, parameters and attribute in the MQI is described by a data type. Each data type has a name. There are two sorts of data types: elementary data types and structure data types.
+<P>
+An elementary data type describes a single item of data. 
+<P>
+A structure data type describes a structure consisting of two or more fields.
+This shows the names of some of the elementary data types, the ones you are most likely to encounter early in your study of the MQI.
+<P>
+Click each elementary data type for a brief description.
+A full list of all elementary data types, with descriptions about each one, is given in the <I>MQSeries Application Programming Reference</I>.
+<br><br><br>
+
+<FONT SIZE="+2">The elementary data types in C and COBOL</FONT>
+<br>
+This lists the names of all the elementary data types previously described.
+Click  the appropriate button to see the equivalent typedef declarations in C, or the equivalent picture clauses in COBOL.
+<br><br><br>
+
+<FONT SIZE="+2">Structure data types</FONT>
+<br>
+There are a number of structure data types defined in the MQI.
+Each structure data type has a name and a set of fields.
+<P>
+The diagram depicts the MQOD structure data type and some of its fields. An instance of a structure with this data type is known as an object descriptor and it is used to identify an MQSeries object, such as a queue, by name.  
+<P>
+Just use MQOD as an example for the moment. This structure data type, and others, is explained in more detail later in the course.
+<P>
+The <I>MQSeries Application Programming Reference</I> defines each structure data type. It provides a brief description of the structure data type and states the context in which it is used. For each of its fields, it specifies:   
+The name of the field (note the notation - the name is in italics).
+<br><br><br>
+
+<FONT SIZE="+2">Named constants</FONT>
+<br>
+The MQI uses many constants. Each constant is given a name.
+<P>
+A constant, decimal 1 for example, may have many different names. Each name describes the context in which the constant is used.The meaningful names for constants make application code and the <I>MQSeries Application Programming Reference</I> easier to understand. For this reason, named constants are used in this course, rather than their actual values.
+<br><br><br>
+
+<FONT SIZE="+2">Named constants</FONT>
+<br>
+The named constants are grouped according to the context in which they are used.   All the names of the constants within a group begin with a common prefix of MQ, followed by a group identifier. An underscore sign ( _ ) separates the group from the name of the constant. 
+<P>
+The <I>MQSeries Application Programming Reference</I> lists all the named constants. The actual value of each named constant, in both decimal and hexadecimal notation, is also listed. This shows the portion of the <I>MQSeries Application Programming Reference</I> that lists the four named constants that are associated with the CompCode parameter. Note the common prefix, "MQCC_".
+<P>
+Click the C or COBOL button to see examples. 
+<br><br><br>
+
+<FONT SIZE="+2">C considerations</FONT>
+<br>
+MQSeries provides a header file to assist with the writing of C applications. The name of the file is CMQC.
+The header file contains the following:
+<UL>
+<LI>The definition of each named constant  
+<LI>The typedef declaration of each data type
+<LI>The definitions of macros to provide initial values for the fields in structures
+<LI>The function protoype for each MQI call
+</UL>
+Here is an example of the portion of the header file that defines the constants for the completion code. Note that, according to the naming conventions, these constants all start with MQCC.
+<br><br><br>
+
+<FONT SIZE="+2">C considerations</FONT>
+<br>
+MQSeries provides typedef declarations for each data type.
+Here is an example of a portion of the header file that declares the MQOD structure data type.
+<br><br><br>
+
+<FONT SIZE="+2">C considerations</FONT>
+<br>
+MQSeries provides definitions of macros to set initial values for the fields in the different structures. Here is a portion of the header file that defines the macro MQOD_DEFAULT which is used to provide initial values for the fields in an MQOD structure.  
+<P>
+The fields can be assigned initial values when an instance of the MQOD structure is declared. 
+<P>
+The names of all the macros have the same structure - the name of the structure data type followed by the suffix "_DEFAULT".
+<br><br><br>
+
+<FONT SIZE="+2">C considerations</FONT>
+<br>
+There is a function prototype defined for each MQI call.
+Here is a portion of the header that contains the function prototype for the MQOPEN call.
+<P>
+You might refer to the <I>Application Programming Reference</I> for more considerations for C programmers.
+<br><br><br>
+
+<FONT SIZE="+2">COBOL considerations</FONT>
+<br>
+MQSeries provides a number of copy books to assist with the writing of COBOL applications.
+There are two copy files for each structure:
+<UL>
+<LI>A copy file with a name ending in "L" is used to declare a structure in either the Working-Storage Section or the Linkage Section
+<LI>A copy file with a name ending in "V" is used to declare a structure in the Working-Storage Section and assign initial values to the fields in the structure  
+</UL>
+The initial values that MQSeries provides in this way are the ones that an application requires in most circumstances.  
+As an example, here are portions of the copy file CMQODL which is used to declare an MQOD structure.
+<br><br><br>
+
+<FONT SIZE="+2">COBOL considerations</FONT>
+<br>
+A copy book with a name ending in "V" is used to declare a structure in the Working-Storage Section and assign initial values to the fields in the structure.  
+<P>
+The initial values that MQSeries provides in this way are the ones that an application requires in most circumstances.  
+<P>
+Here is a portion of the copy file CMQODV which is used to declare an MQOD structure and assign initial values to its fields.
+<br><br><br>
+
+<FONT SIZE="+2">COBOL considerations</FONT>
+<br>
+In addition, there is a copy book to define the values of all the named constants in the Working-Storage Section. The name of the file is CMQV.  
+<P>
+Here is an example of the portion of the header file that defines the constants for the completion code. Note that, according to the naming conventions, these constants all start with MQCC.
+<P>
+Also note the use of the minus character instead of the underscore in the names COBOL uses.
+<br><br><br>
+
+<FONT SIZE="+2">The parameters of an MQI call</FONT>
+<br>
+This depicts the MQOPEN call and its parameters.  <BR>
+The MQOPEN call is used as an example for the moment. This call, and others, will be studied in more detail later in the course.
+<P>
+The MQSeries APR describes the function of each MQI call.  
+For each of its parameters, it specifies:   
+<UL>
+<LI>The name of the parameter (note the notation - the name is in italics)
+<LI>Its data type - it may be an elementary or a structure data type
+<LI>Its purpose
+<LI>Whether it is an input parameter, an output parameter, or an input/output parameter
+<LI>Its permissible values
+<LI>Its default value, where appropriate
+</UL>
+
+Click  "MQOPEN call in C" to see a typical invocation of the MQOPEN call in C and a typical set of declarations of its parameters.<BR>
+Click  "MQOPEN call in COBOL" to see a typical invocation of the MQOPEN call in COBOL and a typical set of declarations of its parameters.
+<br><br><br>
+
+
+<FONT SIZE="+2">The parameters of an MQI call</FONT>
+<br>
+Here is  a typical invocation of the MQOPEN call in C and a typical set of declarations of its parameters. Input only parameters of data type MQHCONN, MQHOBJ, or MQLONG are passed by value. For all other parameters, the address of the parameter is passed by value. Note the use of the MQOD_DEFAULT macro to initialise the fields of the structure, ObjDesc, with data type MQOD.
+<br><br><br>
+
+
+<FONT SIZE="+2">The parameters of an MQI call</FONT>
+<br>
+Here is a typical invocation of the MQOPEN call in COBOL and a typical set of declarations of its parameters. Note the use of the CMQODV copy file to declare an MQOD structure named OBJDESC and to initialise its fields.
+<br><br><br>
+
+
+<FONT SIZE="+2">Preparing an MQSeries application</FONT>
+<br>
+This shows the general approach to prepare an MQSeries application. For simplification many platform, language and compiler differences are ignored.<BR>
+To compile a program, additional C header files, or COBOL copybooks, may be required. These files usually contain additional definitions such as constants, parameter blocks and function prototypes.
+<P>
+To link a program, additional functions must be bound to it. 
+<P>
+On OS/390 an application must be linked with the correct stub program provided by MQSeries for OS/390. This stub program enables the interface between the Queue Manager and the MQSeries application. There are three stub programs available.
+<P>
+Click stub for more details.
+<br><br><br>
+
+
+<FONT SIZE="+2">Preparing an MQSeries application</FONT>
+<br>
+On other platforms such as Unix or Windows NT, an application must be linked with the correct library file provided by MQSeries. The library file that is to be used depends on the programming language, the operating system and the type of application.
+<P>
+Click library to see examples using C on Windows NT.
+<br><br><br>
+
+
+<FONT SIZE="+2">Preparing an MQSeries application</FONT>
+<br>
+In general, an application is to be linked with a different library if it is to run as an MQSeries client application.
+<P>
+Here you see the commands that can be used to prepare an MQSeries server
+Application on Windows NT.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Preparing an MQSeries application</FONT>
+<br>
+Full details on how to prepare applications for all supported platforms can be found in the <I>MQSeries Application Programming Guide</I>. This documentation covers all programming languages except C++ and Java. For C++, see <I>MQSeries Using C++</I>, and, for Java, see <I>MQSeries Using Java</I>.
+<br><br><br>
+
+
+
+</font>
+</body>
+</html>

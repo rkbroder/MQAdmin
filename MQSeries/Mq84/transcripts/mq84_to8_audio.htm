@@ -1,0 +1,169 @@
+<html>
+<head><title>Topic 8 - The MQGET call - Audio transcript </title></head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ83 - Topic 8: The MQGET call</h1>
+
+<FONT SIZE="+2">What happens on an MQGET call?</FONT>
+<br>
+There are five input parameters on an MQGET call:
+
+<UL>
+<LI>A connection handle. The handle was returned by a previous MQCONN call.
+<LI>An object handle. The handle was returned by a previous MQOPEN call. It identifies the queue from which the message is to be retrieved.
+<LI>A message descriptor. It can be used to select which message is to be retrieved from the queue. More about this later in the topic.
+<LI>A get message options structure. This structure specifies the options that control the action of an MQGET call. More about this later in the topic.
+<LI>The length of the buffer to receive the application data in the message being retrieved.
+</UL>
+Roll the mouse over each parameter in turn for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">What happens on an MQGET call?</FONT>
+<br>
+When the queue manager receives control, it performs a number of tasks, including the following:
+<UL>
+<LI>It checks that the object handle is valid and represents access that has been opened for input
+<LI>It checks that each of the get message options and their combination is valid
+<LI>It checks that the buffer is large enough to hold the application data in the message being retrieved
+</UL>
+Provided everything is in order, the queue manager retrieves a message from the queue.
+<br><br><br>
+
+<FONT SIZE="+2">What happens on an MQGET call?</FONT>
+<br>
+There are six output parameters on an MQPUT call:
+<UL>
+<LI>The message descriptor. This is the message descriptor of the message that has been retrieved.
+<LI>The get message options structure. This is an input and output parameter.
+A get message options structure has some fields that are set by the application before issuing an MQGET call and others that are set by the queue manager during the call.
+<LI>The buffer containing the application data in the message.
+<LI>The length of the application data in the message.
+This may be less than the actual size of the buffer reserved by the application. This enables the application to retrieve messages of varying sizes using one general purpose buffer.
+<LI>A completion code.
+<LI>A reason code.
+</UL>
+Roll the mouse over each parameter in turn for a brief description of the parameter and to discover its data type.
+<br><br><br>
+
+<FONT SIZE="+2">What happens on an MQGET call?</FONT>
+<br>
+This is the format of the MQGET call as it appears in the <I>MQSeries Application Programming Reference</I>. Note the order of the parameters.
+<P>
+This has been a summary of what happens when an application issues an MQGET call. You will now study some of the parameters in more detail, starting with the message descriptor .
+<br><br><br>
+
+
+<FONT SIZE="+2">The role of the message descriptor</FONT>
+<br>
+On an MQGET call, the message descriptor is both an input and an output parameter. There is more about the use of message identifiers and correlation identifiers in Topic  “Message and correlation identifiers”.
+Click each of these buttons to find out more about the role of a
+message descriptor in an MQGet call.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The get message options</FONT>
+<br>
+The get message options structure enables the application to specify options that control the action of the MQGET call.
+<P>
+The structure has data type MQGMO.
+<P>
+Some of the fields in the MQGMO structure are shown here.<br>
+They are listed in the order in which they appear within the structure.
+<P>
+See the <I>MQSeries Application Programming Reference</I> for a complete list of fields in the MQGMO structure and a full description of each one.
+<P>
+Click each field in turn for an explanation of the field and to discover its data type.
+<br><br><br>
+
+
+<FONT SIZE="+2">The get message options</FONT>
+<br>
+In Topic  <i>“Introduction to the MQI”</i>, you learned that MQSeries provides a way of initializing the fields in a structure.
+<P>
+Click each field in turn to determine the initial value of the field. For a full list of initial values of the fields in a get message options structure, see the <I>MQSeries Application Programming Reference</I>.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">The length of the buffer</FONT>
+<br>
+The value of the <I>BufferLength</I> parameter should not be larger than the actual size of the buffer reserved by the application to receive the application data.<br>
+Otherwise, memory that is not reserved for the buffer may be overwritten.
+<P>
+It is safest to ensure that the value of <I>BufferLength</I> and the size of the buffer are the same. However, the value of <I>BufferLength</I> may be less than the size of the buffer. The queue manager never fills the buffer beyond the stated length, so there may be data left over from a previous call beyond the stated length.
+<P>
+The actual length of the application data in the message being retrieved is given by the value of <I>DataLength</I>. If the value of <I>DataLength</I> is less than the value of <I>BufferLength</I>, there may be data left over in the buffer from a previous call beyond the area occupied by the application data.
+<br><br><br>
+
+
+<FONT SIZE="+2">The length of the buffer</FONT>
+<br>
+If the length of the application data in the message being retrieved is greater than the value of <I>BufferLength</I>, only <I>BufferLength</I> bytes are returned in the buffer.<br>
+In addition, completion code MQCC_WARNING and reason code MQRC_TRUNCATED_MSG_FAILED are issued.<br>
+In this case the message is not removed from the queue.  However, the value of DataLength still specifies the full length of the application data.<br>
+This allows an application to reissue the MQGET call with a buffer large enough to hold the message.
+<br><br><br>
+
+
+<FONT SIZE="+2">Adjusting the length of the buffer</FONT>
+<br>
+This shows the problem associated with dynamically adjusting the length of a buffer when more than one application is retrieving messages from a queue.<br>
+A similar problem can occur if messages of different priorities are being put on the queue and messages are being returned by successive MQGET calls in priority order.
+<br><br><br>
+
+
+<FONT SIZE="+2">Reason codes</FONT>
+<br>
+There are many reason codes that may be returned by the MQGET call.<br>
+Here are just a few of those that could be returned when an MQGET call fails
+or completes only partially.<br>
+You will find the complete list, along with full descriptions, in the <I>MQSeries Application Programming Reference</I>.
+<P>
+Click each reason code in turn to see its meaning.
+<br><br><br>
+
+<FONT SIZE="+2">Coding the MQGET call</FONT>
+<br>
+Here is an example of how to code the MQGET call. In summary, the code retrieves and  processes every message in a queue. Only the first 100 bytes of the application data in a message are required for the processing.
+<P>
+Refer to the <I>MQSeries Application Programming Reference</I> if you wish to see examples of any of the following in the programming language that you use:
+<UL>
+<LI>How a message descriptor is declared
+<LI>How a put message options structure is declared
+<LI>How the parameters of an MQGET call are declared
+<LI>The format of an MQGET call
+</UL>
+Click each block of pseudocode in turn to read a commentary on what the code does.
+</UL>
+<br><br><br>
+
+
+<FONT SIZE="+2">Browsing messages</FONT>
+<br>
+An application can view the contents of a message on a queue without actually removing the message from the queue.<br>
+This is known as <I>browsing</I> the message.
+<P>
+In order to browse the messages on a queue, the queue must be opened with the open option MQOO_BROWSE.<br>
+The MQOPEN establishes a <I>browse cursor</I> and positions it before the first message in the queue.<br>
+The browse cursor is associated with the object handle returned by the MQOPEN call.
+<P>
+In order to browse the first message on the queue, an application issues an MQGET call with the get message option MQGMO_BROWSE_FIRST.
+The browse cursor is now positioned on this message.
+<P>
+In order to browse the next message in the queue from the current position of the browse cursor, an application issues an MQGET call with the get message option MQGMO_BROWSE_NEXT.<br>
+The browse cursor is now positioned on this message.
+<P>
+Browsing the messages on a queue enables a message to be retrieved according to its contents. When the correct message has been found, and the browse cursor is positioned on it, the application can retrieve it from the queue.<br>
+This is done by issuing an MQGET call with the get message option
+MQGMO_MSG_UNDER_CURSOR.<br>
+To be able to do this, the application must have opened the queue for input as well as for browsing.<br>
+When the message is retrieved from the queue, the browse cursor logically remains at the position in the queue that the message occupied, even though that position is now empty.
+<br><br><br>
+
+</font>
+</body>
+</html>

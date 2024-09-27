@@ -1,0 +1,252 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head><title>Topic 8 - Distributed Queue Management - Audio transcript </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ84 - Topic 8: Distributed Queue Management</h1>
+
+<FONT SIZE="+2"> Assured delivery</FONT>
+<br>
+If an application opens a remote queue, messages are subsequently put on to an associated transmission queue.
+<P>
+The transmission queue is serviced by a message channel agent. This agent application interfaces with the network.  It is responsible for assuring that the messages which are read from the transmission queue are not lost and are delivered only once to the remote queue.
+<br><br><br>
+
+<FONT SIZE="+2"> Identifying the queue in the MQI </FONT>
+<br>
+A queue is identified by two pieces of information, its name and the name of the queue manager that owns it.
+<P>
+In the MQI there are two places where a queue is referenced, one is in the object descriptor and the other in the message descriptor.
+<P>
+If the queue manager name is omitted, the local queue manager will try to resolve the queue name to a current definition. If this is unsuccessful, a response of unknown object will be returned to the application.
+<br><br><br>
+
+
+<FONT SIZE="+2">Queue definitions</FONT>
+<br>
+The transmission queue selected to carry messages will either be explicitly named on the remote queue definition, or resolved as the same name as the remote queue manager. If a transmission queue can not be resolved by either of these two methods, a third and final attempt will be to use the transmission queue named as the queue managers default transmission queue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Channels</FONT>
+<br>
+The channel attributes resolve the communication requirements between two queue managers.
+<P>
+The channel being a unidirectional object, names the direction of the data flow, it must have a matching definition on the remote queue manager, with the same name and complementary attributes.
+<P>
+Queue managers will normally be connected by 2 channels, allowing for a two way exchange of messages.
+<P>
+Roll the mouse over the commands for a description of the function, then click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Channels</FONT>
+<br>
+When defining a channel the name of the channel must be coded first followed by the type of channel.
+<P>
+Many of the channel parameters are optional, but if coded must adhere to the properties of the type of channel.
+<P>
+During startup of a channel the attributes of the two definitions will be verified for consistency.
+<P>
+On starting a channel for the first time many of the attributes are negotiated. The status of this negotiation is recorded in the queue manager information log and the channel is recorded in a special channel file.
+<P>
+On subsequent restarts of the channel many of the attributes are not negotiated as their status is recovered from this channel file.
+<P>
+Click on each parameter for further details, then click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Multiple channels </FONT>
+<br>
+Messages flowing between queue managers may belong to several applications that have different handling requirements. Some may require encryption and compression, while others may require logging and high priority.
+<P>
+To allow for these differing requirements, separate channels can be defined to carry messages for each of the applications to the server queue manager.
+<P>
+Each channel will have a dedicated input transmission queue, pointed to by the application’s remote queue definitions.
+<P>
+If it is necessary to have separate channels for the reply messages, then on the client queue manager a queue manager alias definition must be defined. It is to be used by the application to identify which channel the reply message must be transmitted on.
+<P>
+Roll the mouse over the definitions for a description, then click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">The queue manager alias </FONT>
+<br>
+Each message received over a message channel includes header information to be used by the message channel agent in constructing the open call.
+<P>
+On receipt of an open call, the queue manager checks the named queue manager.  It must resolve to the local queue manager or a transmission queue. If it is not resolved, then the queue manager will assign the default transmission queue.
+If a queue manager is named as a remote queue, it is referred to as a queue manager alias, and is used to assign a transmission queue.
+<P>
+After the open call has completed successfully, the message is then put on the resolved queue object.
+<P>
+If the object is a transmission queue, then navigation information is, again, inserted for the next receiving channel agent to process.
+<P>
+Clustering further simplifies queue manager connection definitions, and this is discussed in a later topic of this course.
+<P>
+Rollover each of the queue managers for a description of the parameters used, then click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Channel types</FONT>
+<br>
+Message channels are implementations of the message channel agent application and are defined to either send or receive messages.
+<P>
+Each channel must have a defined sending side and either a defined or dynamically generated receiving side. By defining both sides of the channel the administrator has complete control over the availability and nature of the channel.
+<P>
+The different types of send and receive channels allow for control over which end of the channel will initiate the connection request.
+<P>
+Roll the mouse over each channel type for a description, then click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">Naming the channel </FONT>
+<br>
+The name given to a channel is not important to the queue manager other than it must be unique within this queue manager and it must be matched by a definition at the receiving location. The name would normally be constructed to indicate the queue manager names and indicate the direction of the data flow.
+<P>
+The channel name is only used on control statements and appears in queue manager information logs and the channel event queue.
+<br><br><br>
+
+
+<FONT SIZE="+2">The type of channel </FONT>
+<br>
+The type of channel must be the first parameter coded after the channel name.
+It identifies the required and optional parameters of the channel definition and indicates the primary and secondary purpose of the channel.
+<P>
+That is, is the channel to send or receive messages? and, is this definition to support the start channel request or not?
+<br><br><br>
+
+
+<FONT SIZE="+2">Channel protocols </FONT>
+<br>
+The transport type parameter describes the networking protocol to be used by this channel definition.
+<P>
+Each channel attached to a queue manager is independently controlled, therefore each could use a different network protocol.
+<P>
+On version 5 queue managers this parameter can be allowed to default to the appropriate system default channel definition.
+<P>
+Roll the mouse over each of the transport types for further information. Then click Next to continue.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">conname </FONT>
+<br>
+The connection name parameter identifies the network destination that this channel is to communicate with. It is at this location that a network listener must be available to receive the attach request and establish the link to the relevant queue manager.
+<P>
+The channel definition does not name the remote queue manager, it is the responsibility of the administrator at the remote location to relate this connection value with the correct queue manager.
+<P>
+This parameter is only valid on channel definitions that are able to be started.
+<P>
+Roll the mouse over the connection types for further details, then click Next to continue.
+
+<br><br><br>
+
+
+<FONT SIZE="+2">xmitq </FONT>
+<br>
+The transmission queue parameter is only valid on channels that send messages.
+It identifies a local queue that has been defined to be used as a transmission queue.
+<P>
+The sending message channel agent will open this queue for input exclusive processing on channel startup, it will hold it open while the channel remains active.
+If the queue is invalid or not available, the channel start will fail and information will be logged in the queue manager information log and the channel event queue.
+<br><br><br>
+
+
+<FONT SIZE="+2">modename </FONT>
+<br>
+The modename entry is required when using the SNA network protocol, it identifies the mode name table entry that this connection is to be bound with. The transaction program name parameter would also be required to be defined on this channel.
+<br><br><br>
+
+
+<FONT SIZE="+2">tpname </FONT>
+<br>
+The transaction program name is required when SNA is named as the network protocol for this channel. It is the name of the message channel agent application at the receiving location. The mode name parameter is also required if this parameter is defined.
+<br><br><br>
+
+
+<FONT SIZE="+2">batchsz </FONT>
+<br>
+The batch size parameter identifies to the message channel agents the maximum number of messages to be sent and received over this channel before a syncpoint is taken.
+<P>
+Persistent messages delivered to queues at the receiving side of a channel are not available for processing until this syncpoint has been taken.
+<P>
+This is part of the assured delivery mechanism of the message channel agents.
+At channel startup this value is negotiated by the channel agents, and the resulting value is used as a loop counter with the sending channel agent.
+<br><br><br>
+
+
+<FONT SIZE="+2">seqwrap </FONT>
+<br>
+The sequence wrap parameter identifies the highest number that can be assigned to a message by the message channel agents before the number resets to 1.
+This value is negotiated on the first start of a channel and the resulting number is stored, along with the last assigned message number, in the channel sequence number file on each of the connected queue managers.
+<P>
+At channel startup the last assigned message number, from both queue managers, will be compared. If they are not equal the channel will shutdown and an error message will be written to the queue manager information log as well as a message being put to the channel event queue.
+<P>
+Redefining a current channel will result in a sequence number error on restart of the channel. This condition requires that the reset command be used, before the channel can be restarted.
+<br><br><br>
+
+
+<FONT SIZE="+2">heartbeat </FONT>
+<br>
+The heartbeat parameter indicates to the sending message channel agent, the maximum interval between heartbeat flows to be sent to the receiving message channel agent. These heartbeats are only issued when there are no messages on the transmission queue. This parameter is negotiated at channel startup and the higher value from the two sides of the channel is taken.
+<P>
+The effect of this parameter is to unblock the receiving channel agent, allowing it to respond to local commands, and to alert the sending channel agent of the failure or unavailability of the receiving channel.
+<br><br><br>
+
+
+<FONT SIZE="+2">npmspeed</FONT>
+<br>
+If the non persistent message speed flag is set to fast, the sending message channel agent gets messages from the transmission queue with the option set to ‘syncpoint but only if messages are non persistent’. This has the effect of removing non persistent messages from unit of work co-ordination. The messages are then not recoverable in the event of a network or queue manager failure.
+<P>
+The receiving side of the channel will also put messages that are marked as non-persistent to queues with the put option of no-syncpoint, thereby releasing the message without waiting for the unit of work to complete.
+<P>
+The default value for this parameter is fast, if the channel definitions are set to different values then the value is set to normal. In this case all messages, both persistent and non-persistent, will be sent and received within units of work and their availability will be controlled by the batch size parameter.
+<br><br><br>
+
+
+<FONT SIZE="+2">Network listener services </FONT>
+<br>
+When TCP is chosen as the network protocol, a number of network definitions must be coded to receive inbound requests.
+<P>
+These definitions will describe the port that data will be received on from the network and which application is needed to be activated to service this inbound data.<br>
+By default, MQSeries uses the port numbered 1414.  Only one queue manager can receive messages from a port.  If multiple queue managers exist at the same network address, each must have a separate port number assigned. This port number can be referenced in the connection address specification on the sender channel.
+<P>
+Optionally, a special purpose MQSeries TCP/IP network listener can be activated to receive these inbound attach requests.
+<br><br><br>
+
+
+<FONT SIZE="+2">Starting the channel</FONT>
+<br>
+A channel can be started by command from the operators console. In this case the channel is active while the command window is available, if the window is closed the channel will also be shutdown. A variation is to issue the command with the platform supported background attribute.
+<P>
+A channel can also be started by command, issued to the MQSeries command utility application, MQSC, as implemented on the platform.
+<P>
+Status and information messages issued by the channel will be written to the queue manager information log and to the platform window, if applicable.
+<br><br><br>
+
+<FONT SIZE="+2">The channel initiator</FONT>
+<br>
+A channel can also be started automatically, by a special purpose trigger monitor known as the channel initiator. This application is programmed to get trigger messages from a channel initiator queue and activate the channel named in the triggerdata or userdata fields of the trigger message. For further information regarding triggering refer to the topic of that name within this course.
+<P>
+Roll the mouse over the text fields for further details. Then click Next to continue.
+<br><br><br>
+
+<FONT SIZE="+2">The state of the channel</FONT>
+<br>
+When a channel is defined it has no current status.
+<P>
+After a start request naming the channel definition has been issued, either by command or by channel initiator, the channel acquires a status.<br>
+It is only then that the current status of the channel is displayable.
+<P>
+Roll the mouse over the displayed channel states for further details, then click Next to continue.
+<br><br><br>
+
+
+
+</font>
+</body>
+</html>

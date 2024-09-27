@@ -1,0 +1,353 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<SCRIPT LANGUAGE="javascript" src="glossary.js">
+</script>
+<LINK REL=stylesheet TYPE="text/css" HREF="Architecture.css" TITLE="style">
+</head>
+
+<BODY bgcolor="#ffffcc" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLL="NO" onLoad="
+     if(is.ns4) {
+          available_width=innerWidth;
+          available_height=innerHeight;
+          PreLoad();
+     } else if(is.ie4) {
+          available_width=document.body.clientWidth;
+          available_height=document.body.clientHeight;
+          PreLoad();
+     }"
+
+onResize="history.go(0)">
+
+<DIV ID="formLayer" STYLE="position: absolute; left: 0px; top: 0px; width: 600px; height: 128px; z-index: 1; visibility: hidden;">
+<FORM NAME="SearchDown">
+<font class=glossaryBig>Type a word and click 'Search' button </font>
+<input type="text" name="word2search">
+<INPUT TYPE="BUTTON" name="GoSearching" VALUE="Search" onClick="LookUp(SearchDown.word2search.value)">
+</FORM>
+</DIV>
+
+<DIV ID="textLayer" STYLE="position: absolute; left: 0px; top: 0px; width:750; height: 128px; z-index: 1; visibility: hidden;">
+<FORM NAME="DropDown"><font class=glossaryBig>
+<center>Match not found.<BR>Scroll down the list, select word and click 'Go' Button </font>
+<SELECT NAME="DDlinks">
+<OPTION SELECTED VALUE="glossExp.htm#abend_reason_code">Abend reason code
+<OPTION VALUE="glossExp.htm#adapter">Adapter
+<OPTION VALUE="glossExp.htm#address_space">Address space
+<OPTION VALUE="glossExp.htm#address_space_identifier">Address space identifier (ASID)
+<OPTION VALUE="glossExp.htm#administrator_commands">Administrator commands
+<OPTION VALUE="glossExp.htm#alert">Alert
+<OPTION VALUE="glossExp.htm#alert_monitor">Alert monitor
+<OPTION VALUE="glossExp.htm#alias_queue_object">Alias queue object
+<OPTION VALUE="glossExp.htm#allied_address_space">Allied address space
+<OPTION VALUE="glossExp.htm#ally">Ally
+<OPTION VALUE="glossExp.htm#APAR">APAR
+<OPTION VALUE="glossExp.htm#application">Application
+<OPTION VALUE="glossExp.htm#application_environment">Application environment
+<OPTION VALUE="glossExp.htm#application_log">Application log
+<OPTION VALUE="glossExp.htm#application_queue">Application queue
+<OPTION VALUE="glossExp.htm#archive_log">Archive log
+<OPTION VALUE="glossExp.htm#ASID">ASID
+<OPTION VALUE="glossExp.htm#asynchronous_messaging">Asynchronous messaging
+<OPTION VALUE="glossExp.htm#attribute">Attribute
+<OPTION VALUE="glossExp.htm#authorization_checks">Authorization checks
+<OPTION VALUE="glossExp.htm#authorization_file">Authorization file
+<OPTION VALUE="glossExp.htm#authorization_service">Authorization service
+<OPTION VALUE="glossExp.htm#authorized_program_analysis_report">Authorized program analysis report
+<OPTION VALUE="glossExp.htm#backout">Backout
+<OPTION VALUE="glossExp.htm#basic_mapping_support">Basic mapping support (BMS)
+<OPTION VALUE="glossExp.htm#blow_up_to_detail">Blow up to detail
+<OPTION VALUE="glossExp.htm#bootstrap_data_set">Bootstrap data set (BSDS)
+<OPTION VALUE="glossExp.htm#browse">Browse
+<OPTION VALUE="glossExp.htm#browse_cursor">Browse cursor
+<OPTION VALUE="glossExp.htm#BSDS">BSDS
+<OPTION VALUE="glossExp.htm#buffer_pool">Buffer pool
+<OPTION VALUE="glossExp.htm#call">Call
+<OPTION VALUE="glossExp.htm#call_back">Call back
+<OPTION VALUE="glossExp.htm#CCF">CCF
+<OPTION VALUE="glossExp.htm#CCSID">CCSID
+<OPTION VALUE="glossExp.htm#CDF">CDF
+<OPTION VALUE="glossExp.htm#channel">Channel
+<OPTION VALUE="glossExp.htm#channel_control_function">Channel control function (CCF)
+<OPTION VALUE="glossExp.htm#channel_definition_file">Channel definition file (CDF)
+<OPTION VALUE="glossExp.htm#channel_event">Channel event
+<OPTION VALUE="glossExp.htm#checkpoint">Checkpoint
+<OPTION VALUE="glossExp.htm#CI">CI
+<OPTION VALUE="glossExp.htm#circular_logging">Circular logging
+<OPTION VALUE="glossExp.htm#CL">CL
+<OPTION VALUE="glossExp.htm#client">Client
+<OPTION VALUE="glossExp.htm#client_application">Client application
+<OPTION VALUE="glossExp.htm#client_connection_channel_type">Client connection channel type
+<OPTION VALUE="glossExp.htm#cluster">Cluster
+<OPTION VALUE="glossExp.htm#coded_character_set_identifier">Coded character set identifier (CCSID)
+<OPTION VALUE="glossExp.htm#command">Command
+<OPTION VALUE="glossExp.htm#command_prefix">Command prefix (CPF)
+<OPTION VALUE="glossExp.htm#command_processor">Command processor
+<OPTION VALUE="glossExp.htm#command_server">Command server
+<OPTION VALUE="glossExp.htm#commit">Commit
+<OPTION VALUE="glossExp.htm#completion_code">Completion code
+<OPTION VALUE="glossExp.htm#communications_connection">Communications connection
+<OPTION VALUE="glossExp.htm#configuration_file">Configuration file
+<OPTION VALUE="glossExp.htm#connect">Connect
+<OPTION VALUE="glossExp.htm#connection_handle">Connection handle
+<OPTION VALUE="glossExp.htm#connection_to_a_q_manager">Connection to a queue manager
+<OPTION VALUE="glossExp.htm#context">Context
+<OPTION VALUE="glossExp.htm#context_security">Context security
+<OPTION VALUE="glossExp.htm#control_command">Control command
+<OPTION VALUE="glossExp.htm#control_interval">Control interval
+<OPTION VALUE="glossExp.htm#control_language">Control language
+<OPTION VALUE="glossExp.htm#controlled_shutdown">Controlled shutdown
+<OPTION VALUE="glossExp.htm#CPF">CPF
+<OPTION VALUE="glossExp.htm#DAE">DAE
+<OPTION VALUE="glossExp.htm#data_flow">Data flow
+<OPTION VALUE="glossExp.htm#database_record_flow">Database record flow
+<OPTION VALUE="glossExp.htm#data_conversion_interface">Data conversion interface (DCI)
+<OPTION VALUE="glossExp.htm#datagram">Datagram
+<OPTION VALUE="glossExp.htm#data_type">Data type
+<OPTION VALUE="glossExp.htm#DCE">DCE
+<OPTION VALUE="glossExp.htm#DCI">DCI
+<OPTION VALUE="glossExp.htm#dead_letter_queue">Dead-letter queue (DLQ)
+<OPTION VALUE="glossExp.htm#dead_letter_queue_handler">Dead-letter queue handler
+<OPTION VALUE="glossExp.htm#default_object">Default object
+<OPTION VALUE="glossExp.htm#deferred_connection">Deferred connection
+<OPTION VALUE="glossExp.htm#distributed_application">Distributed application
+<OPTION VALUE="glossExp.htm#distributed_computing_environment">Distributed Computing Environment (DCE)
+<OPTION VALUE="glossExp.htm#distributed_queue_management">Distributed queue management (DQM)
+<OPTION VALUE="glossExp.htm#DLQ">DLQ
+<OPTION VALUE="glossExp.htm#DQM">DQM
+<OPTION VALUE="glossExp.htm#dual_logging">Dual logging
+<OPTION VALUE="glossExp.htm#dual_mode">Dual mode
+<OPTION VALUE="glossExp.htm#dump_analysis_and_elimination">Dump analysis and elimination (DAE)
+<OPTION VALUE="glossExp.htm#dynamic_queue">Dynamic queue
+<OPTION VALUE="glossExp.htm#environment">Environment
+<OPTION VALUE="glossExp.htm#ESM">ESM
+<OPTION VALUE="glossExp.htm#ESTAE">ESTAE
+<OPTION VALUE="glossExp.htm#event">Event
+<OPTION VALUE="glossExp.htm#event_data">Event data
+<OPTION VALUE="glossExp.htm#event_header">Event header
+<OPTION VALUE="glossExp.htm#event_log">Event log
+<OPTION VALUE="glossExp.htm#event_message">Event message
+<OPTION VALUE="glossExp.htm#event_queue">Event queue
+<OPTION VALUE="glossExp.htm#event_viewer">Event viewer
+<OPTION VALUE="glossExp.htm#external_security_manager">External security manager (ESM)
+<OPTION VALUE="glossExp.htm#FFST">FFST
+<OPTION VALUE="glossExp.htm#FIFO">FIFO
+<OPTION VALUE="glossExp.htm#first_failure_support_technology">First Failure Support Technology (FFST)
+<OPTION VALUE="glossExp.htm#first_in_first_out">first-in-first-out (FIFO)
+<OPTION VALUE="glossExp.htm#flow_of_attributes">Flow of attributes
+<OPTION VALUE="glossExp.htm#forced_shutdown">Forced shutdown
+<OPTION VALUE="glossExp.htm#framework">Framework
+<OPTION VALUE="glossExp.htm#FRR">FRR
+<OPTION VALUE="glossExp.htm#functional_recovery_routine">Functional recovery routine (FRR)
+<OPTION VALUE="glossExp.htm#GCPC">GCPC
+<OPTION VALUE="glossExp.htm#generalized_trace_facility">Generalized Trace Facility (GTF)
+<OPTION VALUE="glossExp.htm#get">Get
+<OPTION VALUE="glossExp.htm#global_trace">Global trace
+<OPTION VALUE="glossExp.htm#GTF">GTF
+<OPTION VALUE="glossExp.htm#handle">Handle
+<OPTION VALUE="glossExp.htm#hardened_message">Hardened message
+<OPTION VALUE="glossExp.htm#immediate_shutdown">Immediate shutdown
+<OPTION VALUE="glossExp.htm#in_doubt_unit_of_recovery">In-doubt unit of recovery
+<OPTION VALUE="glossExp.htm#ini_file">.ini file
+<OPTION VALUE="glossExp.htm#initialization_input_data_sets">Initialization input data sets
+<OPTION VALUE="glossExp.htm#initiate_communications_connection">Initiate communications connection
+<OPTION VALUE="glossExp.htm#initiation_queue">Initiation queue
+<OPTION VALUE="glossExp.htm#input_output_parameter">Input/output parameter
+<OPTION VALUE="glossExp.htm#input_parameter">Input parameter
+<OPTION VALUE="glossExp.htm#inspecting">Inspecting
+<OPTION VALUE="glossExp.htm#installable_services">Installable services
+<OPTION VALUE="glossExp.htm#instrumentation_event">Instrumentation event
+<OPTION VALUE="glossExp.htm#interactive_problem_control_system">Interactive Problem Control System (IPCS)
+<OPTION VALUE="glossExp.htm#interactive_system_productivity_facility">Interactive System Productivity Facility (ISPF)
+<OPTION VALUE="glossExp.htm#IPCS">IPCS
+<OPTION VALUE="glossExp.htm#ISPF">ISPF
+<OPTION VALUE="glossExp.htm#linear_logging">Linear logging
+<OPTION VALUE="glossExp.htm#listener">Listener
+<OPTION VALUE="glossExp.htm#local_definition">Local definition
+<OPTION VALUE="glossExp.htm#local_definition_of_a_remote_queue">Local definition of a remote queue
+<OPTION VALUE="glossExp.htm#locale">Locale
+<OPTION VALUE="glossExp.htm#local_queue">Local queue
+<OPTION VALUE="glossExp.htm#local_queue_manager">Local queue manager
+<OPTION VALUE="glossExp.htm#log">Log
+<OPTION VALUE="glossExp.htm#log_control_file">Log control file
+<OPTION VALUE="glossExp.htm#log_file">Log file
+<OPTION VALUE="glossExp.htm#logical_unit_of_work">Logical unit of work (LUW)
+<OPTION VALUE="glossExp.htm#machine_check_interrupt">Machine check interrupt
+<OPTION VALUE="glossExp.htm#MCA">MCA
+<OPTION VALUE="glossExp.htm#MCI">MCI
+<OPTION VALUE="glossExp.htm#media_image">Media image
+<OPTION VALUE="glossExp.htm#message">Message
+<OPTION VALUE="glossExp.htm#message_channel">Message channel
+<OPTION VALUE="glossExp.htm#message_channel_agent">Message channel agent (MCA)
+<OPTION VALUE="glossExp.htm#message_channel_interface">Message channel interface (MCI)
+<OPTION VALUE="glossExp.htm#message_descriptor">Message descriptor
+<OPTION VALUE="glossExp.htm#message_flow">Message flow
+<OPTION VALUE="glossExp.htm#message_priority">Message priority
+<OPTION VALUE="glossExp.htm#message_queue">Message queue
+<OPTION VALUE="glossExp.htm#message_queue_interface">Message queue interface (MQI)
+<OPTION VALUE="glossExp.htm#message_queuing">Message queuing
+<OPTION VALUE="glossExp.htm#message_sequence_numbering">Message sequence numbering
+<OPTION VALUE="glossExp.htm#messaging">Messaging
+<OPTION VALUE="glossExp.htm#model_queue_object">Model queue object
+<OPTION VALUE="glossExp.htm#MQAI">MQAI
+<OPTION VALUE="glossExp.htm#MQI">MQI
+<OPTION VALUE="glossExp.htm#MQI_channel">MQI channel
+<OPTION VALUE="glossExp.htm#MQSC">MQSC
+<OPTION VALUE="glossExp.htm#mqseries">MQSeries
+<OPTION VALUE="glossExp.htm#mqseries_administration_interface">MQSeries Administration Interface (MQAI)
+<OPTION VALUE="glossExp.htm#mqseries_client">MQSeries client
+<OPTION VALUE="glossExp.htm#mqseries_commands">MQSeries commands (MQSC)
+<OPTION VALUE="glossExp.htm#namelist">Namelist
+<OPTION VALUE="glossExp.htm#name_service">Name service
+<OPTION VALUE="glossExp.htm#name_service_interface">Name service interface (NSI)
+<OPTION VALUE="glossExp.htm#name_transformation">Name transformation
+<OPTION VALUE="glossExp.htm#new_technology_file_system">New Technology File System (NTFS)
+<OPTION VALUE="glossExp.htm#node">Node
+<OPTION VALUE="glossExp.htm#no_message_available">No message available
+<OPTION VALUE="glossExp.htm#nonpersistent_message">Nonpersistent message
+<OPTION VALUE="glossExp.htm#NSI">NSI
+<OPTION VALUE="glossExp.htm#NTFS">NTFS
+<OPTION VALUE="glossExp.htm#null_character">Null character
+<OPTION VALUE="glossExp.htm#OAM">OAM
+<OPTION VALUE="glossExp.htm#object">Object
+<OPTION VALUE="glossExp.htm#object_authority_manager">Object authority manager (OAM)
+<OPTION VALUE="glossExp.htm#object_descriptor">Object descriptor
+<OPTION VALUE="glossExp.htm#object_handle">Object handle
+<OPTION VALUE="glossExp.htm#off_loading">Off-loading
+<OPTION VALUE="glossExp.htm#output_log_buffer">Output log-buffer
+<OPTION VALUE="glossExp.htm#output_parameter">Output parameter
+<OPTION VALUE="glossExp.htm#page_set">Page set
+<OPTION VALUE="glossExp.htm#parameter">Parameter
+<OPTION VALUE="glossExp.htm#parameter_flow">Parameter flow
+<OPTION VALUE="glossExp.htm#PCF">PCF
+<OPTION VALUE="glossExp.htm#PCF_command">PCF command
+<OPTION VALUE="glossExp.htm#pending_event">Pending event
+<OPTION VALUE="glossExp.htm#percolation">Percolation
+<OPTION VALUE="glossExp.htm#performance_event">Performance event
+<OPTION VALUE="glossExp.htm#performance_trace">Performance trace
+<OPTION VALUE="glossExp.htm#performance_dynamic_queue">Performance dynamic queue
+<OPTION VALUE="glossExp.htm#persistent_message">Persistent message
+<OPTION VALUE="glossExp.htm#platform">Platform
+<OPTION VALUE="glossExp.htm#point_of_recovery">Point of recovery
+<OPTION VALUE="glossExp.htm#pointer">Pointer
+<OPTION VALUE="glossExp.htm#preemptive_shutdown">Preemptive shutdown
+<OPTION VALUE="glossExp.htm#principal">Principal
+<OPTION VALUE="glossExp.htm#process">Process
+<OPTION VALUE="glossExp.htm#process_definition_object">Process definition object
+<OPTION VALUE="glossExp.htm#programmable_command_format">Programmable command format (PCF)
+<OPTION VALUE="glossExp.htm#program_temporary_fix">Program temporary fix (PTF)
+<OPTION VALUE="glossExp.htm#PTF">PTF
+<OPTION VALUE="glossExp.htm#queue">Queue
+<OPTION VALUE="glossExp.htm#q_with_messages">Queue with messages
+<OPTION VALUE="glossExp.htm#q_without_messages">Queue without messages
+<OPTION VALUE="glossExp.htm#queue_manager">Queue manager
+<OPTION VALUE="glossExp.htm#queue_manager_event">Queue manager event
+<OPTION VALUE="glossExp.htm#queuing">Queuing
+<OPTION VALUE="glossExp.htm#quiesced_shutdown">Quiesced shutdown
+<OPTION VALUE="glossExp.htm#quiescing">Quiescing
+<OPTION VALUE="glossExp.htm#RBA">RBA
+<OPTION VALUE="glossExp.htm#reason_code">Reason code
+<OPTION VALUE="glossExp.htm#receiver_channel">Receiver channel
+<OPTION VALUE="glossExp.htm#recovery_log">Recovery log
+<OPTION VALUE="glossExp.htm#recovery_termination_manager">Recovery termination manager (RTM)
+<OPTION VALUE="glossExp.htm#registry">Registry
+<OPTION VALUE="glossExp.htm#registry_editor">Registry Editor
+<OPTION VALUE="glossExp.htm#registry_hive">Registry Hive
+<OPTION VALUE="glossExp.htm#relative_byte_address">Relative byte address (RBA)
+<OPTION VALUE="glossExp.htm#remote_queue">Remote queue
+<OPTION VALUE="glossExp.htm#remote_queue_manager">Remote queue manager
+<OPTION VALUE="glossExp.htm#remote_queue_object">Remote queue object
+<OPTION VALUE="glossExp.htm#remote_queuing">Remote queuing
+<OPTION VALUE="glossExp.htm#reply_message">Reply message
+<OPTION VALUE="glossExp.htm#reply_to_queue">Reply-to queue
+<OPTION VALUE="glossExp.htm#report_message">Report message
+<OPTION VALUE="glossExp.htm#requester_channel">Requester channel
+<OPTION VALUE="glossExp.htm#request_message">Request message
+<OPTION VALUE="glossExp.htm#RESLEVEL">RESLEVEL
+<OPTION VALUE="glossExp.htm#resolution_path">Resolution path
+<OPTION VALUE="glossExp.htm#Resource">Resource
+<OPTION VALUE="glossExp.htm#resource_manager">Resource manager
+<OPTION VALUE="glossExp.htm#resource_recovery_services">Resource recovery services (RRS)
+<OPTION VALUE="glossExp.htm#responder">Responder
+<OPTION VALUE="glossExp.htm#resynch">Resynch
+<OPTION VALUE="glossExp.htm#return_codes">Return codes
+<OPTION VALUE="glossExp.htm#rollback">Rollback
+<OPTION VALUE="glossExp.htm#RRS">RRS
+<OPTION VALUE="glossExp.htm#RTM">Recovery termination manager
+<OPTION VALUE="glossExp.htm#rules_table">Rules table
+<OPTION VALUE="glossExp.htm#SDWA">SDWA
+<OPTION VALUE="glossExp.htm#security_enabling_interface">Security enabling interface (SEI)
+<OPTION VALUE="glossExp.htm#SEI">SEI
+<OPTION VALUE="glossExp.htm#sender_channel">Sender channel
+<OPTION VALUE="glossExp.htm#sequential_delivery">Sequential delivery
+<OPTION VALUE="glossExp.htm#sequential_number_wrap_value">Sequential number  wrap value
+<OPTION VALUE="glossExp.htm#server">Server
+<OPTION VALUE="glossExp.htm#server_channel">Server channel
+<OPTION VALUE="glossExp.htm#server_connection_channel_type">Server connection channel type
+<OPTION VALUE="glossExp.htm#service_interval">Service interval
+<OPTION VALUE="glossExp.htm#service_interval_event">Service interval event
+<OPTION VALUE="glossExp.htm#session_id">Session ID
+<OPTION VALUE="glossExp.htm#shutdown">Shutdown
+<OPTION VALUE="glossExp.htm#signaling">Signaling
+<OPTION VALUE="glossExp.htm#single_logging">Single logging
+<OPTION VALUE="glossExp.htm#single_phase_backout">Single-phase backout
+<OPTION VALUE="glossExp.htm#single_phase_backout">Single-phase backout
+<OPTION VALUE="glossExp.htm#single_phase_commit">Single-phase commit
+<OPTION VALUE="glossExp.htm#SIT">SIT
+<OPTION VALUE="glossExp.htm#stanza">Stanza
+<OPTION VALUE="glossExp.htm#starting_an_application">Starting an application
+<OPTION VALUE="glossExp.htm#storage_class">Storage class
+<OPTION VALUE="glossExp.htm#store_and_forward">Store and forward
+<OPTION VALUE="glossExp.htm#structure">Structure
+<OPTION VALUE="glossExp.htm#subsystem">Subsystem
+<OPTION VALUE="glossExp.htm#supervisor_call">Supervisor call (SVC)
+<OPTION VALUE="glossExp.htm#SVC">SVC
+<OPTION VALUE="glossExp.htm#switch_profile">Switch profile
+<OPTION VALUE="glossExp.htm#symptom_string">Symptom string
+<OPTION VALUE="glossExp.htm#synchronous_messaging">Synchronous messaging
+<OPTION VALUE="glossExp.htm#syncpoint">Syncpoint
+<OPTION VALUE="glossExp.htm#system_authorization_facility">System Authorization Facility (SAF)
+<OPTION VALUE="glossExp.htm#system_command_input_queue">System.command.input queue
+<OPTION VALUE="glossExp.htm#system_control_commands">System control commands
+<OPTION VALUE="glossExp.htm#system_initialization_table">System initialization table (SIT)
+<OPTION VALUE="glossExp.htm#TACL">TACL
+<OPTION VALUE="glossExp.htm#target_library_high_level_qualifier">Target library high-level qualifier (thlqual)
+<OPTION VALUE="glossExp.htm#task_control_block">Task control block (TCB)
+<OPTION VALUE="glossExp.htm#task_switching">Task switching
+<OPTION VALUE="glossExp.htm#TCB">TCB
+<OPTION VALUE="glossExp.htm#temporary_dynamic_queue">Temporary dynamic queue
+<OPTION VALUE="glossExp.htm#termination_notification">Termination notification
+<OPTION VALUE="glossExp.htm#thlqual">THLQUAL
+<OPTION VALUE="glossExp.htm#thread">Thread
+<OPTION VALUE="glossExp.htm#time_independent_messaging">Time-independent messaging
+<OPTION VALUE="glossExp.htm#TMI">TMI
+<OPTION VALUE="glossExp.htm#trace">Trace
+<OPTION VALUE="glossExp.htm#tranid">Tranid
+<OPTION VALUE="glossExp.htm#transaction_identifier">Transaction identifier
+<OPTION VALUE="glossExp.htm#transmission_program">Transmission program
+<OPTION VALUE="glossExp.htm#transmission_queue">Transmission queue
+<OPTION VALUE="glossExp.htm#trigger_event">Trigger event
+<OPTION VALUE="glossExp.htm#triggering">Triggering
+<OPTION VALUE="glossExp.htm#trigger_message">Trigger message
+<OPTION VALUE="glossExp.htm#trigger_monitor">Trigger monitor
+<OPTION VALUE="glossExp.htm#trigger_monitor_interface">Trigger monitor interface (TMI)
+<OPTION VALUE="glossExp.htm#two_phase_commit">Two-phase commit
+<OPTION VALUE="glossExp.htm#UIS">UIS
+<OPTION VALUE="glossExp.htm#undelivered_message_queue">Undelivered message queue
+<OPTION VALUE="glossExp.htm#undo_redo_record">Undo/redo record
+<OPTION VALUE="glossExp.htm#unit_of_recovery">Unit of recovery
+<OPTION VALUE="glossExp.htm#unit_of_work">Unit of work
+<OPTION VALUE="glossExp.htm#user_identifier_service">User identifier service (UIS)
+<OPTION VALUE="glossExp.htm#utility">Utility
+<OPTION VALUE="glossExp.htm#woken_up_by_event">Woken up by event
+
+</SELECT>
+<INPUT TYPE="BUTTON" VALUE="Go" onClick="LinkUp(DropDown.DDlinks.options[DropDown.DDlinks.selectedIndex].value)">
+</center>
+</FORM>
+</DIV>
+
+</body>
+</html>

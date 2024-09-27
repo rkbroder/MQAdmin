@@ -1,0 +1,214 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head><title>Topic 2 - Installation and configuration - Audio transcript </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFCC66">
+
+<font face="Arial,Helvetica">
+
+<H1>MQ84 - Topic 2: Installation and configuration</h1>
+
+<FONT SIZE="+2">Planning an MQSeries Implementation </FONT>
+<br>
+When planning to implement MQSeries, you need to decide  which object types will be used and adopt naming conventions for them.
+<P>
+Click each object for a description .
+<br><br><br>
+
+<FONT SIZE="+2">Planning an MQSeries Implementation</FONT>
+<br>
+The first MQSeries object that  needs to be created is a queue manager/ It will own  the other MQSeries objects such as queues, processes and channels.
+<P>
+More than one queue manager can be created on most implementations of MQSeries.
+<br><br><br>
+
+
+<FONT SIZE="+2">Planning an MQSeries Implementation</FONT>
+<br>
+Queues are objects managed by queue managers. An application identifies a queue by its name,  the name may be qualified by the queue manager name.
+<P>
+Here you see a brief description of their purpose.
+<br><br><br>
+
+
+<FONT SIZE="+2">Planning an MQSeries Implementation</FONT>
+<br>
+Some queues have special characteristics, and are used by components of MQSeries. They are covered in more detail later in the course.
+<br><br><br>
+
+
+<FONT SIZE="+2">Planning an MQSeries Implementation</FONT>
+<br>
+A message channel is a uni-directional link between two queue managers. <br>
+It is implemented as an application known as a message channel agent.<br>
+The channel is defined to both queue managers.
+<br><br><br>
+
+
+<FONT SIZE="+2">Administration interfaces</FONT>
+<br>
+After queue manager installation, the administrator will use various methods provided by MQSeries to customize and manage the system.
+<P>
+The runmqsc program enables commands to be issued to manage queues, processes, channels and queue managers, interactively or via batch. The command server will pass the MQSC commands to the queue manager.
+<P>
+Commands to control the queue manager, channels and command server are entered at a command prompt.
+Using Programmable Call Format, an application program will run MQSeries administration commands.
+<P>
+With MQSeries Explorer running under Microsoft Management Console, a graphical interface is used to manage MQSeries.  Under the Microsoft Management Console the MQSeries Services Snap-In enables  more advanced tasks, such as setting up or tuning the MQSeries environment.
+<P>
+Finally, with MQSeries Web Admin, it is possible to manage MQSeries objects on all systems, in an MQSeries network, using a web browser.
+<br><br><br>
+
+<FONT SIZE="+2">Installation</FONT>
+<br>
+These platforms provide standard functions for the installation of MQSeries software.
+<P>
+Each platform has the appropriate MQSeries manual, with instructions for the installation of  the software.
+<P>
+Roll the mouse over the platform you are interested in, for a description of the installation process.
+<br><br><br>
+
+
+<FONT SIZE="+2">Create a queue manager</FONT>
+<br>
+Creating a queue manager, is the next task in the installation of MQSeries. Your userid must belong to the group mqm.
+<P>
+It’s adviseable to use a short name to create a queue manager. The name  must be  unique within a network of interconnected queue managers.<br>
+In this command, the -q option is used to make the queue manager APTEST, the default queue manager.
+<P>
+Click on the create queue manager command to see some of the optional parameters.
+<br><br><br>
+
+
+<FONT SIZE="+2">Create a queue manager</FONT>
+<br>
+This command can delete the queue manager. More detail on this command is covered later in this course.
+<br><br><br>
+
+
+<FONT SIZE="+2">Create a queue manager</FONT>
+<br>
+Starting the queue manager is the next task after creating the queue manager.<br>
+A queue manager has to be started before applications can connect to it and before any commands can be issued to it.<br>
+As a result of this command, MQSeries starts a process called the <I>execution controller</I>:
+<br><br><br>
+
+
+
+<FONT SIZE="+2">Create a queue manager</FONT>
+<br>
+Once a queue manager has started, commands can be issued to it.
+The control command runmqsc enables  MQSeries commands to be entered interactively or via batch.
+<P>
+The results of executing MQSC commands include operator and error messages.
+<P>
+Click the runmqsc command to see some examples, then click Next to continue.
+<br><br><br>
+
+
+
+<FONT SIZE="+2">MQSeries commands</FONT>
+<br>
+The first command creates a local queue MY_DEAD_LETTER_Q.<br>
+You can use def ql instead of define qlocal.<br>
+The second command modifies the queue manager definition by declaring MY_DEAD_LETTER_Q to be the dead letter queue of the queue manager.<br>
+The third command creates another local queue with the description: “this is a test queue”.
+<br><br><br>
+
+
+<FONT SIZE="+2">MQSeries commands</FONT>
+<br>
+Click each command to read more details on it, then click Next to continue.
+<br><br><br>
+
+
+<FONT SIZE="+2">DEFINE</FONT>
+<br>
+Here are examples of the use of the DEFINE command.
+<P>
+The first command defines a local queue with the parameters’ description, put and get, persistency, and max depth, that overwrite the default attributes.<br>
+The keyword replace means, that if the queue already exists, its definition is replaced by the new one.
+<P>
+The second one defines a local queue using the named queue MY_QUEUE for the default values of the attributes.<br>
+Note that this command uses the synonym DEF QL.
+<P>
+The other commands define other queue types such as alias queue, remote queue, and model queue.<br>
+The values of those attributes, which are not explicitly provided by keywords are taken instead from the values of the corresponding attributes, of the appropriate default queue.
+<br><br><br>
+
+
+<FONT SIZE="+2">DISPLAY</FONT>
+<br>
+These commands are used to display the attributes of an MQSeries object.<br>
+DIS is the synonym.<br>
+DISPLAY QUEUE applies to all types of queue: local, alias, remote, and model.<br>
+The attribute <I>all</I> enables the display of all the attributes within the queue.
+<P>
+DISPLAY QLOCAL command is applied to a local queue only.
+The display commands with appropriate keywords such as <I>get, put</I> or <I>maxdepth</I> and <I>curdepth</I>, will display those selected attributes.
+<P>
+Display queue manager command will display the attribute of the queue manager object.
+<br><br><br>
+
+
+<FONT SIZE="+2">ALTER</FONT>
+<br>
+ALTER is the MQSeries command to change the attributes of an MQSeries object.
+<P>
+The alter command only changes the specified attributes of the object, to which the command is applied.
+<P>
+Within the local queue, XXX will change the put attribute to disable.
+<P>
+Within the qalias, AAA will change the target queue. Within the queue manager definition, only the description.
+<P>
+The remaining attributes of the object are left unchanged.
+<br><br><br>
+
+
+<FONT SIZE="+2">DELETE</FONT>
+<br>
+DELETE is the MQSeries command to delete an MQSeries object.
+<P>
+DELETE QLOCAL and DELETE QALIAS will delete the queue regardless of any messages that may still be on that queue.
+<P>
+If the object to be deleted is still in use, the DELETE QLOCAL, DELETE QALIAS and DELETE QREMOTE commands will fail.
+<br><br><br>
+
+
+<FONT SIZE="+2">CLEAR </FONT>
+<br>
+CLEAR is the MQSeries command to delete all messages from a local queue.
+<P>
+CLEAR QLOCAL will fail if the object to be cleared is still in use.
+<br><br><br>
+
+
+<FONT SIZE="+2">Sample programs </FONT>
+<br>
+You can use the sample programs provided with the installation procedure to test the newly created queue manager.
+<P>
+The sample programs are available in C on all queue managers.
+<P>
+All queue managers except MQSeries for Windows provide sample programs in COBOL, but only in source form.
+<P>
+Here you see some sample programs supplied with MQSeries that will be useful in testing a configuration. Click each to get an explanation.
+<br><br><br>
+
+<FONT SIZE="+2">Stop a queue manager </FONT>
+<br>
+At the end of the operation of a queue manager, you can use the endmqm control command to stop the queue manager.
+<P>
+You can use three modes: controlled, immediate or preemptive shutdown.
+<P>
+During the controlled (or quiesced) shutdown, the queue manager stops only after all applications have disconnected.  All new requests to connect to the queue manager will fail. This is the default mode.
+<P>
+With immediate shutdown, the queue manager stops after it has completed all the MQI calls currently being processed.  Any MQI calls issued after this command has been entered fail.  Any incomplete units of work are rolled back when the queue manager is next started.
+<P>
+Finally, during preemptive shutdown, the queue manager stops without waiting for applications to disconnect or for MQI calls to complete.  The use of this mode can lead to unpredictable results.
+<br><br><br>
+
+
+</font>
+</body>
+</html>
